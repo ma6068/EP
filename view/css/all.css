@@ -1,0 +1,385 @@
+.svg-invert {
+    -webkit-filter: invert(100%);
+    /* safari 6.0 - 9.0 */
+    filter: invert(100%);
+}
+
+.search-bar {
+    padding: 10px;
+    text-align: center;
+}
+
+.footer {
+    /*position:absolute;*/
+    bottom:0;
+    width:100%;
+    padding-bottom: 1%;
+    padding-top: 1%;
+    background-color: #FAFAFA;
+    color: #CACACA;
+    text-align: center;
+    font-size: small;
+    /*clear: both;*/
+    /*margin-top: !important 15%;*/
+}
+.header-width {
+    width: 100%;
+}
+
+.p {
+    margin: 0;
+    padding: 0;
+}
+
+.price {
+    margin-top: -4%;
+    text-align: right;
+    font-size: 60%;
+}
+
+.buttonBlue {
+    background-color: #008CBA;
+
+}
+
+.buttonRed {
+    background-color: #f44336;
+}
+
+.cdldAdmin {
+    margin-top: -4%;
+    text-align: right;
+    font-size: 60%;
+}
+
+.heading-style {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
+}
+
+.tabela-style {
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 2%;
+}
+
+.placilo-style {
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 7%;
+    margin-bottom: 10%;
+}
+.header {
+    position:relative;
+    width:100%;
+}
+.table {
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%
+}
+.distance-footer {
+    margin-bottom: 10%;
+}
+
+
+.dialogSize {
+    background-color: #337AB7;
+    padding: 7% 7%;
+    color: #FFF;
+    border-bottom: 2px dashed #337AB7
+}
+
+.invoice-box {
+    max-width: 800px;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #eee;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+    font-size: 16px;
+    line-height: 24px;
+    font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    color: #555;
+}
+
+.invoice-box table {
+    width: 100%;
+    line-height: inherit;
+    text-align: left;
+}
+
+.invoice-box table td {
+    padding: 5px;
+    vertical-align: top;
+}
+
+.invoice-box table tr td:nth-child(2) {
+    text-align: right;
+}
+
+.invoice-box table tr.top table td {
+    padding-bottom: 20px;
+}
+
+.invoice-box table tr.top table td.title {
+    font-size: 45px;
+    line-height: 45px;
+    color: #333;
+}
+
+.invoice-box table tr.information table td {
+    padding-bottom: 40px;
+}
+
+.invoice-box table tr.heading td {
+    background: #eee;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+}
+
+.invoice-box table tr.details td {
+    padding-bottom: 20px;
+}
+
+.invoice-box table tr.item td {
+    border-bottom: 1px solid #eee;
+}
+
+.invoice-box table tr.item.last td {
+    border-bottom: none;
+}
+
+.invoice-box table tr.total td:nth-child(2) {
+    border-top: 2px solid #eee;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+    .invoice-box table tr.top table td {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+
+    .invoice-box table tr.information table td {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+}
+
+/** RTL **/
+
+.rtl {
+    direction: rtl;
+    font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+}
+
+.rtl table {
+    text-align: right;
+}
+
+.rtl table tr td:nth-child(2) {
+    text-align: left;
+}
+
+.spacing-button {
+    margin-top: 15%;
+}
+
+.placilo-header {
+    margin-top: 12%;
+}
+
+.spacing-bottom {
+    margin-bottom: 3%;
+}
+
+.spacing-price {
+    margin-top: 1%;
+}
+
+.dodaj-buttons {
+    text-align: center;
+    margin-top:3%;
+    margin-bottom:3%;
+}
+
+.successful-color {
+    color: green;
+}
+
+.unsuccessful-color {
+    color: red;
+}
+.unsuccessful-order {
+    margin-top: 10%;
+    margin-left: 10%;
+    margin-right: 10%; 
+}
+
+.spacing-between {
+    margin-left: 5%;
+}
+
+.navbar-width {
+    width: 5%;
+    height: 5%
+}
+
+.height-all {
+    height: 100%;
+}
+
+.accordion-style {
+    justify-content: center;
+    align-items: center;
+    margin-top: 5%;
+    margin-right: 10%;
+    margin-left: 10%
+}
+
+.card-body-style {
+    justify-content: center;
+    align-items: center;
+    margin-right: 10%;
+    margin-left: 6%;
+}
+
+.no-borders {
+   border: none; 
+}
+
+.margin-top-10 {
+    margin-top:10%;
+}
+
+.margin-top-2 {
+    margin-top: 2%;
+}
+
+.euro-style {
+    font-size:75%;
+    margin-left:2%;
+}
+
+.ion-icon-trash-style {
+    width: 24px !important;
+    height: 24px !important;
+}
+
+.text-color-red {
+    color: red;
+}
+
+.accordion-style-body {
+    justify-content: center;
+    align-items: center;
+    margin-top: 1%;
+    margin-right: 5%;
+    margin-left: 5%;
+    margin-bottom: 1%;
+}
+
+.padding-bottom-3 {
+    padding-bottom:3%;
+}
+
+.home-popusti-style {
+    display: flex;
+    align-items: center;
+    margin-left: 15%;
+    margin-right: 15%;
+}
+
+.home-main-style {
+    display: flex;
+    align-items: center;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.padding-bottom-1 {
+    padding-bottom:1%; 
+}
+
+.padding-top-3 {
+    padding-top:3%;
+}
+
+.margin-left-2 {
+    margin-left: 2%
+}
+
+.margin-left-5 {
+    margin-left: 5%
+}
+
+.margin-top-2 {
+    margin-top: 2%;
+}
+
+.margin-top-5{
+    margin-top: 5%;
+}
+
+.margin-top-20 {
+    margin-top: 20%;
+}
+
+.margin-left-50 {
+    margin-left:50%;
+}
+
+.text-center {
+    text-align:center;
+}
+
+.margin-top-1 {
+    margin-top: 1%;
+}
+
+.margin-top-0 {
+    margin-top: 0%;
+}
+
+.margin-bottom-30 {
+    margin-bottom:30%;
+}
+
+.kosarica-continue {
+    margin-right: 15%;
+    margin-top: 2%;
+    margin-bottom:20%;
+}
+
+.margin-right-5 {
+    margin-right: 5%;
+}
+    
+.margin-top-05 {
+    margin-top: 0.5%;
+}
+.flex-center {
+     display: flex;
+     justify-content: center;
+     align-items: center; 
+}
+
+.oblik-prijava {
+    background-color: #E9EEF2;
+    border-radius: 8px;
+    margin-top: 15%;
+}
+
+.color-bukvi{
+    color: #33568F;
+}
+
+.margin-bottom-3 {
+    margin-bottom: 3%;
+}
+
+
