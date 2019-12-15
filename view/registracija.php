@@ -28,11 +28,17 @@
                                 <div class="form-group">
                                     <input placeholder="Surname" class="form-control" type="text" maxlength="20">
                                 </div>
+                                <div class="form-group" id="Email">
+                                    <input placeholder="E-mail" class="form-control" type="email" maxlength="30">
+                                </div>
                                 <div class="form-group" id="PhoneNumber">
                                     <input placeholder="Phone number" class="form-control" type="text" maxlength="30">
                                 </div>
-                                <div class="form-group" id="Email">
-                                    <input placeholder="E-mail" class="form-control" type="email" maxlength="30">
+                                <div class="form-group" id="Address">
+                                    <input placeholder="Address" class="form-control" type="text" maxlength="30">
+                                </div>
+                                <div class="form-group" id="AddressNumber">
+                                    <input placeholder="Address number" class="form-control" type="text" maxlength="30">
                                 </div>
                                 <div class="form-group" id="Password">
                                     <input placeholder="Password" class="form-control" type="password" maxlength="30">
