@@ -13,6 +13,7 @@
 <body>
 	<div class="spacing-bottom">
 		<div class="container">
+                    <form class="form-signin" method="POST" action="prijavaController.php">
 			<div class=" row flex-center">
 				<div class="col-md-4 oblik-prijava">
 					<div class=" mt-4">
@@ -22,10 +23,10 @@
 						<article class="card-body">
 							<form role="form">
 								<div class="form-group">
-									<input id="email" placeholder="E-mail" class="form-control" type="email" maxlength="30">
+									<input id="email" name="email" placeholder="E-mail" class="form-control" type="email" maxlength="30">
 								</div>
 								<div class="form-group">
-                                                                    <input id="pass" placeholder="Password" class="form-control" type="password" maxlength="30">
+                                                                    <input id="password" name="password" placeholder="Password" class="form-control" type="password" maxlength="30">
 								</div>
 								<div class="form-group" id="loginButton">
 									<button class="btn btn-primary btn-block" type="submit">Login</button>
