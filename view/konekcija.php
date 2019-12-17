@@ -3,7 +3,7 @@
 	$username = "root";
 	$password = "ep";
 	$dbname = "baza";
-
+        
 	$conn = mysqli_connect($servername, $username, $password, $dbname);
 	error_reporting(E_ERROR); 
         

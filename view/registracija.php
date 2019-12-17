@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -13,6 +17,7 @@
 
 <body>
     <div>
+      <form action="registracijaController.php" method="POST">
         <div class="container spacing-bottom">
             <div class=" row flex-center">
                 <div class="col-md-4 oblik-prijava">
@@ -21,27 +26,35 @@
                             <h2 class="card-title mt-2 text-center">Registration</h2>
                         </div>
                         <article class="card-body">
-                            <form role="form">
                                 <div class="form-group">
-                                    <input placeholder="Name" class="form-control" type="text" maxlength="20">
+                                    <input id="name" name="ime" placeholder="Name" class="form-control" type="text" maxlength="20">
                                 </div>
                                 <div class="form-group">
-                                    <input placeholder="Surname" class="form-control" type="text" maxlength="20">
+                                    <input id="surname" name="priimek" placeholder="Surname" class="form-control" type="text" maxlength="20">
                                 </div>
-                                <div class="form-group" id="Email">
-                                    <input placeholder="E-mail" class="form-control" type="email" maxlength="30">
+                                <div class="form-group">
+                                    <input id="postna_stevilka" name="postna_stevilka" placeholder="Postal code" class="form-control" type="number" maxlength="4">
+                                </div>
+                                <div class="form-group">
+                                    <input id="mesto" name="mesto" placeholder="City" class="form-control" type="text" maxlength="30">
+                                </div>
+                                <div class="form-group">
+                                    <input id="ulica" name="ulica" placeholder="Street" class="form-control" type="text" maxlength="30">
+                                </div>
+                                <div class="form-group">
+                                    <input id="hisna_stevilka" name="hisna_stevilka" placeholder="Street Number" class="form-control" type="text" maxlength="30">
                                 </div>
                                 <div class="form-group" id="PhoneNumber">
-                                    <input placeholder="Phone number" class="form-control" type="text" maxlength="30">
+                                    <input id="telefon" name="telefon" placeholder="Phone number" class="form-control" type="text" maxlength="30">
                                 </div>
-                                <div class="form-group" id="Address">
-                                    <input placeholder="Address" class="form-control" type="text" maxlength="30">
+                                <div class="form-group">
+                                    <input id="email" name="email" placeholder="E-mail" class="form-control" type="email" maxlength="30">
                                 </div>
-                                <div class="form-group" id="Password">
-                                    <input placeholder="Password" class="form-control" type="password" maxlength="30">
+                                <div class="form-group">
+                                    <input id="geslo" name="geslo" placeholder="Password" class="form-control" type="password" maxlength="30">
                                 </div>
-                                <div class="form-group" id="Repeat Password">
-                                    <input placeholder="Repeat password" class="form-control" type="password" maxlength="30">
+                                <div class="form-group">
+                                    <input id="ponoviGeslo" name="ponoviGeslo" placeholder="Repeat password" class="form-control" type="password" maxlength="30">
                                 </div>
                                 <div class="form-group" id="dugme">
                                     <button class="btn btn-primary btn-block" type="submit"> Register</button>
@@ -49,12 +62,18 @@
                                 <div class="form-group">
                                     <p>Already have an account? <a href="/netbeans/EP/view/prijava.php">Log in</a></p>
                                 </div>
-                            </form>
+                            <?php
+				if(isset($_SESSION["napaka"])) {
+                                    echo '<center><p id="reg_err">' . $_SESSION["napaka"] . '</p></center>';
+                                    unset($_SESSION["napaka"]); 
+				}
+                            ?>
                         </article>
                     </div>
                 </div>
             </div>
         </div>
+       </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
