@@ -35,10 +35,10 @@
     // barame dali postoi toj korisnik
     $query = "SELECT * FROM uporabnik WHERE email='$email'";
     $rezultat = mysqli_query($conn, $query);
-    $podatoci = mysqli_num_rows($rezultat);
+    $brojPodatoci = mysqli_num_rows($rezultat);
             
     // ako postoi so takov email ne moze pak da se registrira
-    if ($podatoci > 0) {
+    if ($brojPodatoci > 0) {
         mysqli_stmt_close($sql); 
         mysqli_close($conn);
 	$_SESSION["napaka"] = "User with that email already exists";
@@ -50,10 +50,10 @@
     // ako ne postoi go dodavame vo bazata 
     $query = "SELECT id_naslov FROM naslov WHERE postna_stevilka='$postna_stevilka' AND mesto='$mesto' AND ulica='$ulica' AND hisna_stevilka='$hisna_stevilka'";
     $rezultat = mysqli_query($conn, $query);
-    $podatoci = mysqli_num_rows($rezultat);
+    $brojPodatoci = mysqli_num_rows($rezultat);
 	
     // taa adresa prv pat ja gledame i ja dodavame vo bazata
-    if($podatoci == 0) {
+    if($brojPodatoci == 0) {
         $query = "INSERT INTO naslov (postna_stevilka, mesto, ulica, hisna_stevilka)
                       VALUES ('$postna_stevilka', '$mesto', '$ulica', '$hisna_stevilka')";
         $dodadeno = mysqli_query($conn, $query);

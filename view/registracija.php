@@ -67,6 +67,10 @@
                                     echo '<center><p id="reg_err">' . $_SESSION["napaka"] . '</p></center>';
                                     unset($_SESSION["napaka"]); 
 				}
+                                if(isset($_SESSION["uspeh"])) {
+                                    echo '<center><p id="uspeh">' . $_SESSION["uspeh"] . '</p></center>';
+                                    unset($_SESSION["napaka"]); 
+				}
                             ?>
                         </article>
                     </div>
