@@ -9,7 +9,7 @@
     $hisna_stevilka = $_POST["hisna_stevilka"];
     
     // ako se site prazni
-    if (empty($postna_stevilka) && empty($mesto) && empty($ulica) && empty($hisna_stevilka)) {
+    if (empty($postna_stevilka) || empty($mesto) || empty($ulica) || empty($hisna_stevilka)) {
         $_SESSION["napaka"] = "please fill all fields";
         header('Location: ' . "./editAdresa.php");
         exit();
