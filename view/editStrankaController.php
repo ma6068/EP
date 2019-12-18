@@ -11,34 +11,41 @@
     $novEmail = $_POST["novEmail"];
     $geslo = $_POST["geslo"];
     $novoGeslo = $_POST["novoGeslo"];
+    $telefon = $_POST['telefon'];
+    $novTelefon = $_POST['novTelefon'];
     
     // ako se site prazni
     if (empty($ime) && empty($novoIme) && empty($priimek) && empty($novPriimek) 
-            && empty($email) && empty($novEmail) && empty($geslo) && empty($novoGeslo)) {
+            && empty($email) && empty($novEmail) && empty($geslo) && empty($novoGeslo) && empty($telefon) && empty($novTelefon)) {
         $_SESSION["napaka"] = "Nothing to change";
-        header('Location: ' . "./editAdmin.php");
+        header('Location: ' . "./editStranka.php");
         exit();
     }
     
     // ako ednoto od polinjata e prazno a drugoto ne znaci deka ima gresno ispolneto
     if (empty($ime) && !empty($novoIme) || !empty($ime) && empty($novoIme)) {
         $_SESSION["napaka"] = "Check current or new name";
-        header('Location: ' . "./editAdmin.php");
+        header('Location: ' . "./editStranka.php");
         exit();
     }
     if (empty($priimek) && !empty($novPriimek) || !empty($priimek) && empty($novPriimek)) {
         $_SESSION["napaka"] = "Check current or new surname";
-        header('Location: ' . "./editAdmin.php");
+        header('Location: ' . "./editStranka.php");
         exit();
     }
     if (empty($email) && !empty($novEmail) || !empty($email) && empty($novEmail)) {
         $_SESSION["napaka"] = "Check current or new email";
-        header('Location: ' . "./editAdmin.php");
+        header('Location: ' . "./editStranka.php");
         exit();
     }
     if (empty($geslo) && !empty($novoGeslo) || !empty($geslo) && empty($novoGeslo)) {
         $_SESSION["napaka"] = "Check current or new password";
-        header('Location: ' . "./editAdmin.php");
+        header('Location: ' . "./editStranka.php");
+        exit();
+    }
+    if (empty($telefon) && !empty($novTelefon) || !empty($telefon) && empty($novTelefon)) {
+        $_SESSION["napaka"] = "Check current or new phone number";
+        header('Location: ' . "./editStranka.php");
         exit();
     }
     
@@ -53,14 +60,14 @@
         $podatoci = mysqli_fetch_assoc($rezultat);
         if ($podatoci['ime'] != $ime) {
             $_SESSION["napaka"] = "Wrong current name";
-            header('Location: ' . "./editAdmin.php");
+            header('Location: ' . "./editProdajalec.php");
             exit();
         }
         else {
             $query = "UPDATE uporabnik SET ime='$novoIme' WHERE id_uporabnik='$sega'";
             $rezultat = mysqli_query($conn, $query);
             $_SESSION["napaka"] = "Changes successfully saved";
-            header('Location: ' . "./editAdmin.php");
+            header('Location: ' . "./editProdajalec.php");
             //exit();
         }
     }
@@ -74,14 +81,14 @@
         $podatoci = mysqli_fetch_assoc($rezultat);
         if ($podatoci['priimek'] != $priimek) {
             $_SESSION["napaka"] = "Wrong current surname";
-            header('Location: ' . "./editAdmin.php");
+            header('Location: ' . "./editProdajalec.php");
             exit();
         }
         else {
             $query = "UPDATE uporabnik SET priimek='$novPriimek' WHERE id_uporabnik='$sega'";
             $rezultat = mysqli_query($conn, $query);
             $_SESSION["napaka"] = "Changes successfully saved";
-            header('Location: ' . "./editAdmin.php");
+            header('Location: ' . "./editProdajalec.php");
             //exit();
         }
     }
@@ -95,14 +102,14 @@
         $podatoci = mysqli_fetch_assoc($rezultat);
         if ($podatoci['email'] != $email) {
             $_SESSION["napaka"] = "Wrong current email";
-            header('Location: ' . "./editAdmin.php");
+            header('Location: ' . "./editProdajalec.php");
             exit();
         }
         else {
             $query = "UPDATE uporabnik SET email='$novEmail' WHERE id_uporabnik='$sega'";
             $rezultat = mysqli_query($conn, $query);
             $_SESSION["napaka"] = "Changes successfully saved";
-            header('Location: ' . "./editAdmin.php");
+            header('Location: ' . "./editProdajalec.php");
             //exit();
         }
     }
@@ -116,16 +123,38 @@
         $podatoci = mysqli_fetch_assoc($rezultat);
         if ($podatoci['geslo'] != $geslo) {
             $_SESSION["napaka"] = "Wrong current password";
-            header('Location: ' . "./editAdmin.php");
+            header('Location: ' . "./editProdajalec.php");
             exit();
         }
         else {
             $query = "UPDATE uporabnik SET geslo='$novoGeslo' WHERE id_uporabnik='$sega'";
             $rezultat = mysqli_query($conn, $query);
             $_SESSION["napaka"] = "Changes successfully saved";
-            header('Location: ' . "./editAdmin.php");
+            header('Location: ' . "./editProdajalec.php");
+            //exit();
+        }
+    }
+    // telefon 
+    if (!empty($telefon) && !empty($novTelefon)) {
+        // proveri dali e toa stvarno negovoto ime
+        $sega = $_SESSION['id_uporabnik'];
+        $query = "SELECT telefon FROM uporabnik WHERE id_uporabnik='$sega'";
+        $rezultat = mysqli_query($conn, $query);
+        $brojPodatoci = mysqli_num_rows($rezultat);
+        $podatoci = mysqli_fetch_assoc($rezultat);
+        if ($podatoci['telefon'] != $telefon) {
+            $_SESSION["napaka"] = "Wrong current phone number";
+            header('Location: ' . "./editProdajalec.php");
+            exit();
+        }
+        else {
+            $query = "UPDATE uporabnik SET telefon='$novTelefon' WHERE id_uporabnik='$sega'";
+            $rezultat = mysqli_query($conn, $query);
+            $_SESSION["napaka"] = "Changes successfully saved";
+            header('Location: ' . "./editProdajalec.php");
             //exit();
         }
     }
     
 ?>
+
