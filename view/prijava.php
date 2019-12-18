@@ -38,17 +38,17 @@
 				<div class="form-group">
                                     <p>Don't have an account? <a href="/netbeans/EP/view/registracija.php">Create one!</a></p>
 				</div>
+                            <?php
+                                if(isset($_SESSION["napaka"])) {
+                                    echo '<center><p id="reg_err">' . $_SESSION["napaka"] . '</p></center>';
+                                    unset($_SESSION["napaka"]); 
+                                }
+                                ?>
 				</form>
 				</article>
                             </div>
                         </div>
 		</div>
-                <?php
-                    if(isset($_SESSION["napaka"])) {
-                    echo '<center><p id="reg_err">' . $_SESSION["napaka"] . '</p></center>';
-                    unset($_SESSION["napaka"]); 
-                    }
-                ?>
                 </from>
            
             </div>
