@@ -77,7 +77,7 @@
     $query = "INSERT INTO uporabnik (ime, priimek, email, geslo, telefon, status, uloga, fk_id_naslov) VALUES ('$ime', '$priimek', '$email', '$geslo', '$telefon', 'aktiven', 'stranka', '$fk_id_naslov')";
     $dodadeno = mysqli_query($conn, $query);
     if (dodadeno) {
-        $_SESSION["napaka"] = "User successfully added";
+        $_SESSION["napaka"] = "Registration completed successfully";
         header('Location: ' . "./registracija.php");
         exit();
     }

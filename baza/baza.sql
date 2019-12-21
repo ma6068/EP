@@ -160,10 +160,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `baza`;
-INSERT INTO `baza`.`kosarica` (`id_kosarica`, `datum`, `status`, `fk_id_uporabnik`) VALUES (DEFAULT, '2020-01-08 22:34:04', 'neobdelano', 1);
-INSERT INTO `baza`.`kosarica` (`id_kosarica`, `datum`, `status`, `fk_id_uporabnik`) VALUES (DEFAULT, '2019-11-27 09:36:11', 'potrjeno', 1);
-INSERT INTO `baza`.`kosarica` (`id_kosarica`, `datum`, `status`, `fk_id_uporabnik`) VALUES (DEFAULT, '2019-12-18 11:11:45', 'stornirano', 1);
-INSERT INTO `baza`.`kosarica` (`id_kosarica`, `datum`, `status`, `fk_id_uporabnik`) VALUES (DEFAULT, '2019-12-22 15:54:22', 'potrjeno', 1);
+INSERT INTO `baza`.`kosarica` (`id_kosarica`, `datum`, `status`, `fk_id_uporabnik`) VALUES (DEFAULT, '2020-01-08 22:34:04', 'neobdelano', 5);
+INSERT INTO `baza`.`kosarica` (`id_kosarica`, `datum`, `status`, `fk_id_uporabnik`) VALUES (DEFAULT, '2019-11-27 09:36:11', 'potrjeno', 6);
+INSERT INTO `baza`.`kosarica` (`id_kosarica`, `datum`, `status`, `fk_id_uporabnik`) VALUES (DEFAULT, '2019-12-18 11:11:45', 'stornirano', 6);
+INSERT INTO `baza`.`kosarica` (`id_kosarica`, `datum`, `status`, `fk_id_uporabnik`) VALUES (DEFAULT, '2019-12-22 15:54:22', 'potrjeno', 7);
 
 COMMIT;
 
