@@ -55,7 +55,16 @@
                     $_SESSION['email'] = $podatoci['email'];
                     $_SESSION['uloga'] = $podatoci['uloga'];
                     $_SESSION["napaka"] = "Uspesno !";
-                    header('Location: ' . "./prijava.php");
+                    
+                    if ($_SESSION['uloga']=='admin') {
+                        header('Location: ' . "./adminAddProdajalec.php");
+                    }
+                    if ($_SESSION['uloga']=='prodajalec') {
+                        header('Location: ' . "./prijava.php");
+                    }
+                    if ($_SESSION['uloga']=='stranka') {
+                        header('Location: ' . "./prijava.php");
+                    }
                     exit();
                 }
             }
