@@ -46,7 +46,6 @@
 	exit();
     }
     
-    // NE GO DODAVA VO BAZATA...
     // ako ne postoi go dodavame vo bazata 
     $query = "SELECT id_naslov FROM naslov WHERE postna_stevilka='$postna_stevilka' AND mesto='$mesto' AND ulica='$ulica' AND hisna_stevilka='$hisna_stevilka'";
     $rezultat = mysqli_query($conn, $query);
@@ -63,26 +62,22 @@
             $_SESSION["napaka"] = $_SESSION["napaka"] . "Error while adding address";
             header('Location: ' . "./registracija.php");
             exit();
-    }   	
-	$query = "SELECT id_naslov FROM naslov WHERE postna_stevilka='$postna_stevilka' AND mesto='$mesto' AND ulica='$ulica' AND hisna_stevilka='$hisna_stevilka'";
-	$rezultat = mysqli_query($conn, $query);
-        $podatoci = mysqli_fetch_assoc($rezultat);
-        $fk_id_naslov = $podatoci['id_naslov'];
+        }   	
     }
-    // go ima, zatoa zacuvaj go tuj kljuc za vo tabelata uporabnik
-    else {
-	$fk_id_naslov = $podatoci['id_naslov'];
-    }
-        
+    // go zemame id-to na adresata 
+    $query = "SELECT id_naslov FROM naslov WHERE postna_stevilka='$postna_stevilka' AND mesto='$mesto' AND ulica='$ulica' AND hisna_stevilka='$hisna_stevilka'";
+    $rezultat = mysqli_query($conn, $query);
+    $podatoci = mysqli_fetch_assoc($rezultat);
+    $fk_id_naslov = $podatoci['id_naslov'];
+
     // skrien pasvord
     $skrienPasvord = password_hash($geslo, PASSWORD_BCRYPT);
         
     // go dodavame uporabnikot
-    $query = "INSERT INTO uporabnik (ime, priimek, email, geslo, telefon, status, uloga, fk_id_naslov) "
-            . "VALUES ('$ime', '$priimek', '$email', '$skrienPasvord', '$telefon', 'aktiven', 'stranka', '$fk_id_naslov')";
+    $query = "INSERT INTO uporabnik (ime, priimek, email, geslo, telefon, status, uloga, fk_id_naslov) VALUES ('$ime', '$priimek', '$email', '$geslo', '$telefon', 'aktiven', 'stranka', '$fk_id_naslov')";
     $dodadeno = mysqli_query($conn, $query);
     if (dodadeno) {
-        $_SESSION["napaka"] = "Registration completed successfully";
+        $_SESSION["napaka"] = "User successfully added";
         header('Location: ' . "./registracija.php");
         exit();
     }
