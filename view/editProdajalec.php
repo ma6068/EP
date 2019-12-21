@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    include 'prodajalecGlava.php';
 ?>
 
 <!DOCTYPE html>

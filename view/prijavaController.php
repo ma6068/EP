@@ -57,10 +57,10 @@
                     $_SESSION["napaka"] = "Uspesno !";
                     
                     if ($_SESSION['uloga']=='admin') {
-                        header('Location: ' . "./adminAddProdajalec.php");
+                        header('Location: ' . "./editAdmin.php");
                     }
                     if ($_SESSION['uloga']=='prodajalec') {
-                        header('Location: ' . "./prijava.php");
+                        header('Location: ' . "./editProdajalec.php");
                     }
                     if ($_SESSION['uloga']=='stranka') {
                         header('Location: ' . "./prijava.php");

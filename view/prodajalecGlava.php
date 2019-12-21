@@ -8,7 +8,7 @@
 <head>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<meta charset="utf-8">
-	<title>Admin header</title>
+	<title>Prodajalec header</title>
         <link rel="stylesheet" type="text/css" href="./css/all.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -22,17 +22,8 @@
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="./editAdmin.php">Edit profile<span class="sr-only"></span></a>
-				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="./adminAddProdajalec.php">Add seller<span class="sr-only"></span></a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="./adminEditProdajalec.php">Edit seller</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="./adminADProdajalec.php">Change seller's status</a>
+                                    <a class="nav-link" href="./editProdajalec.php">Edit profile<span class="sr-only"></span></a>
 				</li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
@@ -54,3 +45,4 @@
 
 
 </html>
+
