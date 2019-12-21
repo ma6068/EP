@@ -146,11 +146,11 @@ START TRANSACTION;
 USE `baza`;
 INSERT INTO `baza`.`uporabnik` (`id_uporabnik`, `ime`, `priimek`, `email`, `geslo`, `telefon`, `status`, `uloga`, `fk_id_naslov`) VALUES (DEFAULT, 'Admin', 'Adminovic', 'admin@gmail.com', 'Admin123', NULL, 'aktiven', 'admin', NULL);
 INSERT INTO `baza`.`uporabnik` (`id_uporabnik`, `ime`, `priimek`, `email`, `geslo`, `telefon`, `status`, `uloga`, `fk_id_naslov`) VALUES (DEFAULT, 'Martin', 'Arsovski', 'martin@gmail.com', 'Martin123', NULL, 'aktiven', 'prodajalec', NULL);
-INSERT INTO `baza`.`uporabnik` (`id_uporabnik`, `ime`, `priimek`, `email`, `geslo`, `telefon`, `status`, `uloga`, `fk_id_naslov`) VALUES (DEFAULT, 'Emil', 'Batakliev', 'emil@gmail.com', 'Emil123', NULL, 'blokiran', 'prodajalec', NULL);
+INSERT INTO `baza`.`uporabnik` (`id_uporabnik`, `ime`, `priimek`, `email`, `geslo`, `telefon`, `status`, `uloga`, `fk_id_naslov`) VALUES (DEFAULT, 'Emil', 'Batakliev', 'emil@gmail.com', 'Emil123', NULL, 'deaktiviran', 'prodajalec', NULL);
 INSERT INTO `baza`.`uporabnik` (`id_uporabnik`, `ime`, `priimek`, `email`, `geslo`, `telefon`, `status`, `uloga`, `fk_id_naslov`) VALUES (DEFAULT, 'Maja', 'Nikoloska', 'maja@gmail.com', 'Maja123', NULL, 'aktiven', 'prodajalec', NULL);
 INSERT INTO `baza`.`uporabnik` (`id_uporabnik`, `ime`, `priimek`, `email`, `geslo`, `telefon`, `status`, `uloga`, `fk_id_naslov`) VALUES (DEFAULT, 'Luka', 'Doncic', 'luka@gmail.com', 'Luka123', '030123123', 'aktiven', 'stranka', 1);
 INSERT INTO `baza`.`uporabnik` (`id_uporabnik`, `ime`, `priimek`, `email`, `geslo`, `telefon`, `status`, `uloga`, `fk_id_naslov`) VALUES (DEFAULT, 'Goran', 'Dragic', 'goran@gmail.com', 'Gorannn', '070987987', 'aktiven', 'stranka', 2);
-INSERT INTO `baza`.`uporabnik` (`id_uporabnik`, `ime`, `priimek`, `email`, `geslo`, `telefon`, `status`, `uloga`, `fk_id_naslov`) VALUES (DEFAULT, 'Ana', 'Novak', 'ana@gmail.com', 'Ana123', '030456456', 'blokiran', 'stranka', 3);
+INSERT INTO `baza`.`uporabnik` (`id_uporabnik`, `ime`, `priimek`, `email`, `geslo`, `telefon`, `status`, `uloga`, `fk_id_naslov`) VALUES (DEFAULT, 'Ana', 'Novak', 'ana@gmail.com', 'Ana123', '030456456', 'aktiven', 'stranka', 3);
 
 COMMIT;
 
