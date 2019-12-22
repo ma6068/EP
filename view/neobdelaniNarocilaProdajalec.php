@@ -2,7 +2,7 @@
     include 'konekcija.php';
     include 'prodajalecGlava.php';
     
-    $query = "SELECT a.marka, a.cena, a.slika, a.opis, k.datum, k.kolicina, u.ime, u.priimek, u.email, u.telefon "
+    $query = "SELECT a.marka, a.cena, a.slika, a.opis, k.id_kosarica, k.datum, k.kolicina, u.ime, u.priimek, u.email, u.telefon "
             . "FROM avto a, kosarica k, kosarica_avto ka, uporabnik u "
             . "WHERE k.status='neobdelano' AND k.id_kosarica=ka.fk_id_k AND ka.fk_id_a=a.id_avto AND u.id_uporabnik=k.fk_id_uporabnik";
     $rezultat = mysqli_query($conn, $query);
@@ -47,7 +47,10 @@
                                 </tr>
                         </td>
                     </tr>
-                </table>';
+                </table>
+                <a class="btn btn-primary" href="./potrdiAvto.php?id_kosarica=' . $podatok['id_kosarica'] . '">Confirm</a>
+                <a class="btn btn-danger" href="./prekliciAvto.php?id_kosarica=' . $podatok['id_kosarica'] . '">Cancel</a>
+                </form>';
         }
     }
     // nema neobdelani podatoci
