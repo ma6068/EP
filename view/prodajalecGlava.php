@@ -31,6 +31,12 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="./obdelaniNarocilaProdajalec.php">Confirmed orders<span class="sr-only"></span></a>
 				</li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="./addAvto.php">Add car<span class="sr-only"></span></a>
+				</li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="./editAvto.php">Edit car<span class="sr-only"></span></a>
+				</li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
 				<a class="nav-link" href="./odjava.php">Log out</a>
