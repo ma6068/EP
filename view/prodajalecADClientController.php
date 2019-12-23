@@ -10,18 +10,12 @@
     // ako ima prazno pole
     if (empty($email) || empty($geslo) || empty(status)) {
         $_SESSION["napaka"] = "Please fill in all fields";
-        header('Location: ' . "./adminADProdajalec.php");
-        exit();
-    }
-    
-    if ($status != 'aktiven' || $status != 'deaktiviran') {
-        $_SESSION["napaka"] = "Status can be only aktiven or deaktiviran";
-        header('Location: ' . "./adminADProdajalec.php");
+        header('Location: ' . "./prodajalecADClient.php");
         exit();
     }
     
     // vidi dali imas uporabnik so takov email
-    $query = "SELECT * FROM uporabnik WHERE email='$email' AND geslo='$geslo' AND uloga='prodajalec'";
+    $query = "SELECT * FROM uporabnik WHERE email='$email' AND geslo='$geslo' AND uloga='stranka'";
     $rezultat = mysqli_query($conn, $query);
     $brojPodatoci = mysqli_num_rows($rezultat);
     $podatoci = mysqli_fetch_assoc($rezultat);
@@ -30,8 +24,8 @@
     if($brojPodatoci == 0) {
         mysqli_stmt_close($sql); 
         mysqli_close($conn);
-        $_SESSION["napaka"] = "Can't find that seller";
-        header('Location: ' . "./adminADProdajalec.php");
+        $_SESSION["napaka"] = "Can't find that client";
+        header('Location: ' . "./prodajalecADClient.php");
         exit();
     }
     
@@ -40,7 +34,7 @@
     $query = "UPDATE uporabnik SET status='$status' WHERE id_uporabnik='$id'";
     $rezultat = mysqli_query($conn, $query);
     $_SESSION["napaka"] = "Status successfully changed";
-    header('Location: ' . "./adminADProdajalec.php");
+    header('Location: ' . "./prodajalecADClient.php");
     exit();
 ?>
 

@@ -1,8 +1,8 @@
 <?php
     include 'konekcija.php';
-    include 'adminGlava.php';
+    include 'prodajalecGlava.php';
     
-    $query = "SELECT * FROM uporabnik WHERE uloga='prodajalec'";
+    $query = "SELECT * FROM uporabnik WHERE uloga='stranka'";
     $rezultat = mysqli_query($conn, $query);
     $podatoci = mysqli_num_rows($rezultat);
     
@@ -13,27 +13,29 @@
                         <td align="center" valign="center">
                             <table style="width:100%">
                                 <tr>
-                                    <th>Seller\'s name</th>
-                                    <th>Seller\'s surname</th>
-                                    <th>Seller\'s email</th>
+                                    <th>Client name</th>
+                                    <th>Client surname</th>
+                                    <th>Client email</th>
+                                    <th>Client phone number</th>
                                     <th>Status</th>
                                 </tr>
                                 <tr>
                                     <td>'.$podatok['ime'].'</td>
                                     <td>'.$podatok['priimek'].'</td>
                                     <td>'.$podatok['email'].'</td>
+                                    <td>'.$podatok['telefon'].'</td>
                                     <td>'.$podatok['status'].'</td>
                                 </tr>
                         </td>
                     </tr>
                 </table>
-                <a class="btn btn-primary" href="./adminEditProdajalec2.php?id_uporabnik=' . $podatok['id_uporabnik'] . '">Edit</a>
+                <a class="btn btn-primary" href="./prodajalecEditClient2.php?id_uporabnik=' . $podatok['id_uporabnik'] . '">Edit</a>
                 </form>';
         }
     }
     // nema stranki
     else {
-        echo '<h1>No sellers</h1>';
+        echo '<h1>No clients</h1>';
     }
 	
     mysqli_stmt_close($sql); 
