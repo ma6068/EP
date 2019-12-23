@@ -1,6 +1,6 @@
 <?php
     include 'konekcija.php';
-    include 'prodajalecGlava.php';
+    include 'strankaGlava.php';
     
     $query = "SELECT * FROM avto";
     $rezultat = mysqli_query($conn, $query);
@@ -35,7 +35,7 @@
                         </td>
                     </tr>
                 </table>
-               <a class="btn btn-primary" href="./editAvtoController.php?id_avto=' . $podatok['id_avto'] . '">Edit</a>';
+                <a class="btn btn-primary" href="./editAvtoController.php?id_avto=' . $podatok['id_avto'] . '">Add to Cart</a>';
         }
     }
     // nema neobdelani podatoci

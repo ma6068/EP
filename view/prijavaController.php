@@ -63,7 +63,7 @@
                         header('Location: ' . "./editProdajalec.php");
                     }
                     if ($_SESSION['uloga']=='stranka') {
-                        header('Location: ' . "./prijava.php");
+                        header('Location: ' . "./editStranka.php");
                     }
                     exit();
                 }
