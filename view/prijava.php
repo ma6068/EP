@@ -1,6 +1,4 @@
-<?php
-    session_start();
-?>
+
 
 <!DOCTYPE html>
 <html>
@@ -15,6 +13,7 @@
 
 
 <body>
+    <?php include 'anonimenGlava.php';?>
     <div class="spacing-bottom">
         <div class="container">
             <form class="form-signin" method="POST" action="prijavaController.php">
