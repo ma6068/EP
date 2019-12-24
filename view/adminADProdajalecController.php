@@ -14,6 +14,12 @@
         exit();
     }
     
+    if ($status != 'aktiven' || $status != 'deaktiviran') {
+        $_SESSION["napaka"] = "Status can be only aktiven or deaktiviran";
+        header('Location: ' . "./adminADProdajalec.php");
+        exit();
+    }
+    
     // vidi dali imas uporabnik so takov email
     $query = "SELECT * FROM uporabnik WHERE email='$email' AND geslo='$geslo' AND uloga='prodajalec'";
     $rezultat = mysqli_query($conn, $query);

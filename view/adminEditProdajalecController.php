@@ -4,56 +4,61 @@
     include 'konekcija.php';
     
     $ime = $_POST["ime"];
-    $novoIme = $_POST["novoIme"];
     $priimek = $_POST["priimek"];
-    $novPriimek = $_POST["novPriimek"];
     $email = $_POST["email"];
-    $novEmail = $_POST["novEmail"];
     $geslo = $_POST["geslo"];
-    $novoGeslo = $_POST["novoGeslo"];
     
-    // ako ima prazno pole
-    if (empty($ime) || empty($novoIme) || empty($priimek) || empty($novPriimek) 
-            || empty($email) || empty($novEmail) || empty($geslo) || empty($novoGeslo)) {
-        $_SESSION["napaka"] = "Please fill in all fields";
-        header('Location: ' . "./adminEditProdajalec.php");
+    $id_uporabnik = $_SESSION['id_uporabnik'];
+    
+    // ako site polinja se prazni
+    if (empty($ime) && empty($priimek) && empty($email) && empty($geslo)) {
+        $_SESSION["napaka"] = "Nothing to change";
+        header('Location: ' . "./adminEditProdajalec2.php?id_uporabnik=$id_uporabnik");
         exit();
     }
     
     // vidi dali imas uporabnik so takov email
-    $query = "SELECT * FROM uporabnik WHERE email='$novEmail'";
+    $query = "SELECT * FROM uporabnik WHERE email='$email'";
     $rezultat = mysqli_query($conn, $query);
     $brojPodatoci = mysqli_num_rows($rezultat);
     $podatoci = mysqli_fetch_assoc($rezultat);
-    if($brojPodatoci > 0 && $email != $novEmail) {
+    if($brojPodatoci > 0) {
         mysqli_stmt_close($sql); 
         mysqli_close($conn);
         $_SESSION["napaka"] = "User with that email doesn't exists";
-        header('Location: ' . "./prijava.php");
-        exit();
-    }
-    
-    
-    // vidi dali toj prodavac postoi
-    $query="SELECT id_uporabnik FROM uporabnik WHERE ime='$ime' AND priimek='$priimek' AND email='$email' AND geslo='$geslo' AND status='aktiven' AND uloga='prodajalec'";
-    $rezultat = mysqli_query($conn, $query);
-    $brojPodatoci = mysqli_num_rows($rezultat);
-    $podatoci = mysqli_fetch_assoc($rezultat);
-    
-    // toj prodavac ne postoi 
-    if ($brojPodatoci==0) {
-        $_SESSION["napaka"] = "Seller does not exist";
-        header('Location: ' . "./adminEditProdajalec.php");
+        header('Location: ' . "./adminEditProdajalec2.php?id_uporabnik=$id_uporabnik");
         exit();
     }
         
-    // toj prodavac postoi pa ke mu gi smenime podatocite
-    $id=$podatoci['id_uporabnik'];
-    $query = "UPDATE uporabnik SET ime='$novoIme', priimek='$novPriimek', email='$novEmail', geslo='$novoGeslo' WHERE id_uporabnik='$id'";
-    $rezultat = mysqli_query($conn, $query);
-    $_SESSION["napaka"] = "Changes successfully saved";
-    header('Location: ' . "./adminEditProdajalec.php");
-    exit();
+    // ime
+    if (!empty($ime)) {
+        $query = "UPDATE uporabnik SET ime='$ime' WHERE id_uporabnik='$id_uporabnik'";
+        $rezultat = mysqli_query($conn, $query);
+        $_SESSION["napaka"] = "Changes successfully saved";
+    }
     
+    // priimek
+    if (!empty($priimek)) {
+        $query = "UPDATE uporabnik SET priimek='$priimek' WHERE id_uporabnik='$id_uporabnik'";
+        $rezultat = mysqli_query($conn, $query);
+        $_SESSION["napaka"] = "Changes successfully saved";
+    }
+    
+    // email 
+    if (!empty($email)) {
+        $query = "UPDATE uporabnik SET email='$email' WHERE id_uporabnik='$id_uporabnik'";
+        $rezultat = mysqli_query($conn, $query);
+        $_SESSION["napaka"] = "Changes successfully saved";
+    }
+    
+    // geslo 
+    if (!empty($geslo)) {
+        $query = "UPDATE uporabnik SET geslo='$geslo' WHERE id_uporabnik='$id_uporabnik'";
+        $rezultat = mysqli_query($conn, $query);
+        $_SESSION["napaka"] = "Changes successfully saved";
+    }
+    
+    header('Location: ' . "./adminEditProdajalec2.php?id_uporabnik=$id_uporabnik");
+    exit();
 ?>
 

@@ -20,7 +20,20 @@
     if (empty($ime) && empty($priimek) && empty($postna_stevilka) && empty($mesto) 
             && empty($ulica) && empty($hisna_stevilka) && empty($telefon) && empty($email) && empty($geslo) && empty($ponoviGeslo)) {
         $_SESSION["napaka"] = "Nothing to change";
-        header('Location: ' . "./prodajalecEditClient2.php");
+        header('Location: ' . "./prodajalecEditClient2.php?id_uporabnik=$id_uporabnik");
+        exit();
+    }
+    
+    // vidi dali imas uporabnik so takov email
+    $query = "SELECT * FROM uporabnik WHERE email='$email'";
+    $rezultat = mysqli_query($conn, $query);
+    $brojPodatoci = mysqli_num_rows($rezultat);
+    $podatoci = mysqli_fetch_assoc($rezultat);
+    if($brojPodatoci > 0) {
+        mysqli_stmt_close($sql); 
+        mysqli_close($conn);
+        $_SESSION["napaka"] = "User with that email doesn't exists";
+        header('Location: ' . "./prodajalecEditClient2.php?id_uporabnik=$id_uporabnik");
         exit();
     }
     
@@ -37,7 +50,7 @@
         $_SESSION["napaka"] = "Changes successfully saved";
     }
     // email
-    if (!empty($ime)) {
+    if (!empty($email)) {
         $query = "UPDATE uporabnik SET email='$email' WHERE id_uporabnik='$id_uporabnik'";
         $rezultat = mysqli_query($conn, $query);
         $_SESSION["napaka"] = "Changes successfully saved";
@@ -95,6 +108,6 @@
         $rezultat = mysqli_query($conn, $query);
         $_SESSION["napaka"] = "Changes successfully saved";
     }
-    header('Location: ' . "./prodajalecEditClient2.php");
+    header('Location: ' . "./prodajalecEditClient2.php?id_uporabnik=$id_uporabnik");
     exit();
 ?>
