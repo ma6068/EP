@@ -11,27 +11,58 @@
     
     $id_avto = $_SESSION['id_avto'];
     
-    // ako ima prazno pole
-    if (empty($marka) || empty($cena) || empty($slika) || empty($opis) || empty($aktiven)) {
-        $_SESSION["napaka"] = "Please fill in all fields";
-        header('Location: ' . "editAvto2.php");
+    // ako se site prazni
+    if (empty($marka) && empty($cena) && empty($slika) && empty($opis) && empty($aktiven)) {
+        $_SESSION["napaka"] = "Nothing to change";
+        header('Location: ' . "./editAvto2.php?id_avto=$id_avto");
         exit();
     }
     
     
     // ako aktiven gresno nastaveno
-    if ($aktiven!=1 && $aktiven!=2) {
+    if ($aktiven!=1 && $aktiven!=2 && !empty($aktiven)) {
         $_SESSION["napaka"] = "Illegal activation value";
-        header('Location: ' . "editAvto2.php");
+        header('Location: ' . "./editAvto2.php?id_avto=$id_avto");
         exit();
     }
     
     
-    // editiraj ja kolata 
-    $query = "UPDATE avto SET marka='$marka', cena='$cena', slika='$slika', aktiven='$aktiven', opis='$opis' WHERE id_avto='$id_avto'";
-    $rezultat = mysqli_query($conn, $query);
-    $_SESSION["napaka"] = "Car successfully edited";
-    header('Location: ' . "editAvto2.php");
+    // marka 
+    if (!empty($marka)) {
+        $query = "UPDATE avto SET marka='$marka' WHERE id_avto='$id_avto'";
+        $rezultat = mysqli_query($conn, $query);
+        $_SESSION["napaka"] = "Car successfully edited";
+    }
+    
+    // cena 
+    if (!empty($cena)) {
+        $query = "UPDATE avto SET cena='$cena' WHERE id_avto='$id_avto'";
+        $rezultat = mysqli_query($conn, $query);
+        $_SESSION["napaka"] = "Car successfully edited";
+    }
+    
+    // slika 
+    if (!empty($slika)) {
+        $query = "UPDATE avto SET slika='$slika' WHERE id_avto='$id_avto'";
+        $rezultat = mysqli_query($conn, $query);
+        $_SESSION["napaka"] = "Car successfully edited";
+    }
+    
+    // aktiven 
+    if (!empty($aktiven)) {
+        $query = "UPDATE avto SET aktiven='$aktiven' WHERE id_avto='$id_avto'";
+        $rezultat = mysqli_query($conn, $query);
+        $_SESSION["napaka"] = "Car successfully edited";
+    }
+    
+    // opis 
+    if (!empty($opis)) {
+        $query = "UPDATE avto SET opis='$opis' WHERE id_avto='$id_avto'";
+        $rezultat = mysqli_query($conn, $query);
+        $_SESSION["napaka"] = "Car successfully edited";
+    }
+
+    header('Location: ' . "./editAvto2.php?id_avto=$id_avto");
     exit();
     
 
