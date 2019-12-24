@@ -9,7 +9,25 @@
     $podatoci = mysqli_num_rows($rezultat);
     
     if ($podatoci > 0) {
+        $brojPoracka = 0;
+        $idSega = '';
+        $prvPodatok = 'da';
         while ($podatok = mysqli_fetch_assoc($rezultat)) {
+           $imaPromena = 'ne';
+            if ($idSega != $podatok['id_kosarica']) {
+                if ($prvPodatok == 'ne') {
+                    echo '<div style="margin-top: 5%"><h4>Total: '.$sum.' $</h4></div>
+                            <a class="btn btn-primary" href="./stornirajAvto.php?id_kosarica=' . $idSega . '">Reverse</a>';
+                }
+                $idSega = $podatok['id_kosarica'];
+                $brojPoracka = $brojPoracka + 1;
+                $imaPromena = 'da';
+                $sum = 0;
+            }
+            $sum += $podatok['cena'] * $podatok['kolicina'];
+            if ($imaPromena == 'da') {
+                echo '<br></br><h3 align="center">Order number : '.$brojPoracka.'</h3>';
+           }
            echo '<table align=center width="100%" border="0" cellpadding="100">
                     <tr>
                         <td align="center" valign="center">
@@ -48,16 +66,19 @@
                         </td>
                     </tr>
                 </table>
-                <a class="btn btn-primary" href="./stornirajAvto.php?id_kosarica=' . $podatok['id_kosarica'] . '">Reverse</a>
                 </form>';
+            $prvPodatok = 'ne';
         }
+        // za poslednata ispis 
+        echo '<div style="margin-top: 5%"><h4>Total: '.$sum.' $</h4></div>
+                <a class="btn btn-primary" href="./stornirajAvto.php?id_kosarica=' . $idSega . '">Reverse</a>';
     }
     // nema neobdelani podatoci
     else {
-        echo '<h1>No comfirmed orders</h1>';
+        echo '<h1>No confirmed orders</h1>';
     }
 	
     mysqli_stmt_close($sql); 
     mysqli_close($conn);
-
+    
 ?>
