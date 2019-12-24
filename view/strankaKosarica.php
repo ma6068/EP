@@ -13,7 +13,7 @@
     
     if ($podatoci > 0) {
         while ($podatok = mysqli_fetch_assoc($rezultat)) {
-            $sum += $podatok['cena'];
+            $sum += ( $podatok['cena'] * $podatok['kolicina'] );
             echo '<div><table align=center width="100%" border="0" cellpadding="100">
                     <tr>
                         <td align="center" valign="center">

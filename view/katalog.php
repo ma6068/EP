@@ -2,7 +2,7 @@
     include 'konekcija.php';
     include 'strankaGlava.php';
     
-    $query = "SELECT * FROM avto";
+    $query = "SELECT * FROM avto WHERE aktiven = '1'";
     $rezultat = mysqli_query($conn, $query);
     $podatoci = mysqli_num_rows($rezultat);
     
