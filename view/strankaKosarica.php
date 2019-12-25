@@ -1,18 +1,26 @@
 <?php
     include 'konekcija.php';
     include 'strankaGlava.php';
+    session_start();
     
-    $idUporabnik = $_SESSION['id_uporabnik'];
+    $id_uporabnik = $_SESSION['id_uporabnik'];
     $sum = 0;
-    
-    $query = "SELECT a.marka, a.cena, a.slika, a.opis, k.id_kosarica, k.datum, k.kolicina, u.ime, u.priimek, u.email, u.telefon "
-            . "FROM avto a, kosarica k, kosarica_avto ka, uporabnik u "
-            . "WHERE u.id_uporabnik=$idUporabnik AND k.status='neobdelano' AND k.id_kosarica=ka.fk_id_k AND ka.fk_id_a=a.id_avto AND u.id_uporabnik=k.fk_id_uporabnik";
+      
+    $query = "SELECT a.marka, a.cena, a.slika, a.opis, k.kolicina, a.id_avto, k.id_kosarica "
+            . "FROM avto a, kosarica k, kosarica_avto ka "
+            . "WHERE k.fk_id_uporabnik='$id_uporabnik' AND k.status='oddano' AND k.id_kosarica=ka.fk_id_k AND ka.fk_id_a=a.id_avto";
     $rezultat = mysqli_query($conn, $query);
     $podatoci = mysqli_num_rows($rezultat);
     
+    $prvPat = 'da';
+    $id_kosarica = '';
     if ($podatoci > 0) {
         while ($podatok = mysqli_fetch_assoc($rezultat)) {
+            if ($prvPat == 'da') {
+                $prvPat = 'ne';
+                $id_kosarica = $podatok['id_kosarica'];
+                $_SESSION['id_kosarica'] = $podatok['id_kosarica'];
+            }
             $sum += ( $podatok['cena'] * $podatok['kolicina'] );
             echo '<div><table align=center width="100%" border="0" cellpadding="100">
                     <tr>
@@ -34,15 +42,15 @@
                         </td>
                     </tr>
                 </table>
-                <a class="btn btn-danger" href="./prekliciAvto.php?id_kosarica=' . $podatok['id_kosarica'] . '">Delete</a>
+                <a class="btn btn-danger" href="./kosaricaTrganjeKola.php?id_avto=' . $podatok['id_avto'] . '">Delete</a>
                 </div>';
         }
         echo '<div style="margin-top: 5%"><h2>Total: '.$sum.'</h2></div>';
-        echo '<div style="margin-top: 1%"><a class="btn btn-primary" href="./potrdiAvto.php?id_kosarica=' . $podatok['id_kosarica'] . '">Confirm</a></div>';
+        echo '<div style="margin-top: 1%"><a class="btn btn-primary" href="./kosaricaPotvrda.php?id_kosarica=' . $id_kosarica . '">Confirm</a></div>';
     }
-    // nema neobdelani podatoci
+    // nema koli vo kosarica
     else {
-        echo '<h1>No uncomfirmed orders</h1>';
+        echo '<h1>You don\'t have car\'s on your cart</h1>';
     }
 	
     mysqli_stmt_close($sql); 
