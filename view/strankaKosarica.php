@@ -22,28 +22,34 @@
                 $_SESSION['id_kosarica'] = $podatok['id_kosarica'];
             }
             $sum += ( $podatok['cena'] * $podatok['kolicina'] );
-            echo '<div><table align=center width="100%" border="0" cellpadding="100">
+            echo '
+                <div><table align=center width="100%" border="0" cellpadding="100">
                     <tr>
                         <td align="center" valign="center">
                             <img class="group list-group-image" src="../images/' . $podatok['slika'] . '" alt="" />
                             <table style="width:100%">
                                 <tr>
-                                    <th>Brand</th>
-                                    <th>Description</th>
-                                    <th>Price</th>
-                                    <th>Amount</th>
+                                    <th style="width: 20%">Brand</th>
+                                    <th style="width: 20%">Description</th>
+                                    <th style="width: 20%">Price</th>
+                                    <th style="width: 20%">Amount</th>
                                 </tr>
                                 <tr>
-                                    <td>'.$podatok['marka'].'</td>
-                                    <td>'.$podatok['opis'].'</td>
-                                    <td>'.$podatok['cena'].'</td>
-                                    <td>'.$podatok['kolicina'].'</td>
+                                    <td style="width: 20%">'.$podatok['marka'].'</td>
+                                    <td style="width: 20%">'.$podatok['opis'].'</td>
+                                    <td style="width: 20%">'.$podatok['cena'].'</td>
+                                    <td style="width: 20%">
+                                        <form method="POST" action="kosaricaPotvrda.php">
+                                        <input class="form-control mr-sm-2" type="number" name="broj" placeholder="Amount" aria-label="Search" style="width: 50%">
+                                        </form>
+                                    </td>
                                 </tr>
                         </td>
                     </tr>
                 </table>
                 <a class="btn btn-danger" href="./kosaricaTrganjeKola.php?id_avto=' . $podatok['id_avto'] . '">Delete</a>
-                </div>';
+                </div>
+                ';
         }
         echo '<div style="margin-top: 5%"><h2>Total: '.$sum.'</h2></div>';
         echo '<div style="margin-top: 1%"><a class="btn btn-primary" href="./kosaricaPotvrda.php?id_kosarica=' . $id_kosarica . '">Confirm</a></div>';
