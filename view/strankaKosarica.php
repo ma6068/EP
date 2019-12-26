@@ -40,7 +40,7 @@
                                     <td style="width: 20%">'.$podatok['cena'].'</td>
                                     <td style="width: 20%">
                                         <form method="POST" action="kosaricaPotvrda.php">
-                                        <input class="form-control mr-sm-2" type="number" name="broj" placeholder="Amount" aria-label="Search" style="width: 50%">
+                                        <input class="form-control mr-sm-2" type="number" min="1" name="broj" placeholder="Amount" aria-label="Search" style="width: 50%">
                                         </form>
                                     </td>
                                 </tr>

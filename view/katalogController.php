@@ -27,9 +27,18 @@
    
     $id_kosarica = $podatoci['id_kosarica'];
     
-    // ja dodavame kolata vo negovata kosarica 
-    $query = "INSERT INTO kosarica_avto(fk_id_k, fk_id_a) VALUES('$id_kosarica', '$id_avto')";
+    // proveruvame dali taa kola veke ja ima vo kosaricata
+    $query = "SELECT * FROM kosarica_avto WHERE fk_id_k='$id_kosarica' AND fk_id_a='$id_avto'";
     $rezultat = mysqli_query($conn, $query);
+    $brojPodatoci = mysqli_num_rows($rezultat);
+    $podatoci = mysqli_fetch_assoc($rezultat);
+    
+    // taa kola ja nema vo kosaricata pa ja dodavame
+    if ($brojPodatoci == 0) {
+        $query = "INSERT INTO kosarica_avto(fk_id_k, fk_id_a) VALUES('$id_kosarica', '$id_avto')";
+        $rezultat = mysqli_query($conn, $query);
+    }
+    
     header('Location: ' . "./strankaKosarica.php");
     exit();
     
