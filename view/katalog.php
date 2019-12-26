@@ -35,12 +35,12 @@
                         </td>
                     </tr>
                 </table>
-                <a class="btn btn-primary" href="./editAvtoController.php?id_avto=' . $podatok['id_avto'] . '">Add to Cart</a>';
+                <a class="btn btn-primary" href="./katalogController.php?id_avto=' . $podatok['id_avto'] . '">Add to Cart</a>';
         }
     }
     // nema neobdelani podatoci
     else {
-        echo '<h1>No comfirmed orders</h1>';
+        echo '<h1>No articles</h1>';
     }
 	
     mysqli_stmt_close($sql); 

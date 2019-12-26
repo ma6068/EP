@@ -13,10 +13,11 @@
             //echo($row['priimek'] + " ");
             //echo($row['telefon'] + " ");
             //echo($row['geslo'] + " ");
-            echo($row['ime']);
-            echo($row['priimek']);
-            echo("\n");
+            //echo($row['ime']);
+            //echo($row['priimek']);
+            //echo("\n");
         }
     }
+    echo $_SESSION['id_kosarica'];
 ?>
 

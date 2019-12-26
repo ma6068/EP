@@ -1,0 +1,37 @@
+<?php
+
+    include 'konekcija.php';
+    session_start();
+    
+    $id_avto = $_GET["id_avto"];
+    $idUporabnik = $_SESSION['id_uporabnik'];
+   
+    // prvo proveruvame dali toj uporabnik veke ima kosarica
+    $query = "SELECT * FROM kosarica WHERE fk_id_uporabnik='$idUporabnik' AND status='oddano'";
+    $rezultat = mysqli_query($conn, $query);
+    $brojPodatoci = mysqli_num_rows($rezultat);
+    $podatoci = mysqli_fetch_assoc($rezultat);
+    
+    // uporabnikot nema kosarica (zatoa praveme kosarica)
+    if ($brojPodatoci == 0) {
+        $datum = date("Y-m-d h:m:s");
+        $query = "INSERT INTO kosarica(datum, status, kolicina, fk_id_uporabnik) VALUES ('$datum', 'oddano', '1', '$idUporabnik')";
+        $rezultat = mysqli_query($conn, $query);
+        
+        // go zemame id-to od kosaricata so ja napravivme 
+        $query = "SELECT * FROM kosarica WHERE fk_id_uporabnik='$idUporabnik' AND status='oddano'";
+        $rezultat = mysqli_query($conn, $query);
+        $brojPodatoci = mysqli_num_rows($rezultat);
+        $podatoci = mysqli_fetch_assoc($rezultat);
+    }
+   
+    $id_kosarica = $podatoci['id_kosarica'];
+    
+    // ja dodavame kolata vo negovata kosarica 
+    $query = "INSERT INTO kosarica_avto(fk_id_k, fk_id_a) VALUES('$id_kosarica', '$id_avto')";
+    $rezultat = mysqli_query($conn, $query);
+    header('Location: ' . "./strankaKosarica.php");
+    exit();
+    
+?>
+
