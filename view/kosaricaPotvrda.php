@@ -3,13 +3,14 @@
     include 'konekcija.php';
     session_start();
     
-    $broj = $_POST['broj'];
     $id_kosarica = $_GET['id_kosarica'];
-    $_SESSION['id_kosarica'] = $id_kosarica;
-    // menuvame status od oddano vo neobdelano
-    $query = "UPDATE kosarica SET status='neobdelano', kolicina='$broj' WHERE id_kosarica='$id_kosarica'";
-    $rezultat = mysqli_query($conn, $query);
     
-    header('Location: ' . "./strankaKosarica.php");
+    foreach($_POST['kolicina'] as $k => $kolicina){
+        // menuvame status od oddano vo neobdelano i ja menuvame kolicinata
+        $query = "UPDATE kosarica SET status='neobdelano', kolicina='$kolicina' WHERE id_kosarica='$id_kosarica'";
+        $rezultat = mysqli_query($conn, $query);
+        $_SESSION['kolicina'] = $kolicina;
+    }
+    header('Location: ' . "./test.php");
     exit();
 ?>

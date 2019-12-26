@@ -19,5 +19,6 @@
         }
     }
     echo $_SESSION['id_kosarica'];
+    echo $_SESSION['kolicina'];
 ?>
 

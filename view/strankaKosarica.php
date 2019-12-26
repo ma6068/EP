@@ -14,8 +14,10 @@
     
     $prvPat = 'da';
     $id_kosarica = '';
+    $counter = -1;
     if ($podatoci > 0) {
         while ($podatok = mysqli_fetch_assoc($rezultat)) {
+            $counter = $counter + 1;
             if ($prvPat == 'da') {
                 $prvPat = 'ne';
                 $id_kosarica = $podatok['id_kosarica'];
@@ -23,7 +25,8 @@
             }
             $sum += ( $podatok['cena'] * $podatok['kolicina'] );
             echo '
-                <div><table align=center width="100%" border="0" cellpadding="100">
+                <div>
+                <table align=center width="100%" border="0" cellpadding="100">
                     <tr>
                         <td align="center" valign="center">
                             <img class="group list-group-image" src="../images/' . $podatok['slika'] . '" alt="" />
@@ -32,23 +35,22 @@
                                     <th style="width: 20%">Brand</th>
                                     <th style="width: 20%">Description</th>
                                     <th style="width: 20%">Price</th>
-                                    <th style="width: 20%">Amount</th>
                                 </tr>
                                 <tr>
                                     <td style="width: 20%">'.$podatok['marka'].'</td>
                                     <td style="width: 20%">'.$podatok['opis'].'</td>
                                     <td style="width: 20%">'.$podatok['cena'].'</td>
-                                    <td style="width: 20%">
-                                        <form method="POST" action="kosaricaPotvrda.php">
-                                        <input class="form-control mr-sm-2" type="number" min="1" name="broj" placeholder="Amount" aria-label="Search" style="width: 50%">
-                                        </form>
-                                    </td>
                                 </tr>
                         </td>
                     </tr>
                 </table>
+                  <div class="form-group">
+                    <form action="kosaricaPotvrda.php" method="POST">
+                        Amount
+                        <input id="kolicina" name="kolicina['.$counter.']" class="form-control mr-sm-2" style="width: 20%" type="number" value="1" min="1" placeholder="Amount" aria-label="Search" style="width: 50%">
+                    </form>
+                    </div>
                 <a class="btn btn-danger" href="./kosaricaTrganjeKola.php?id_avto=' . $podatok['id_avto'] . '">Delete</a>
-                </div>
                 ';
         }
         echo '<div style="margin-top: 5%"><h2>Total: '.$sum.'</h2></div>';
