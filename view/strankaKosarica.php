@@ -20,16 +20,18 @@
                             <img class="group list-group-image" src="../images/' . $podatok['slika'] . '" alt="" />
                             <table style="width:100%">
                                 <tr>
-                                    <th>Brand</th>
-                                    <th>Description</th>
-                                    <th>Price</th>
-                                    <th>Amount</th>
+                                    <th style="width: 20%">Brand</th>
+                                    <th style="width: 20%">Description</th>
+                                    <th style="width: 20%">Price</th>
+                                    <th style="width: 20%">Amount</th>
                                 </tr>
                                 <tr>
-                                    <td>'.$podatok['marka'].'</td>
-                                    <td>'.$podatok['opis'].'</td>
-                                    <td>'.$podatok['cena'].'</td>
-                                    <td>'.$podatok['kolicina'].'</td>
+                                    <td style="width: 20%">'.$podatok['marka'].'</td>
+                                    <td style="width: 20%">'.$podatok['opis'].'</td>
+                                    <td style="width: 20%">'.$podatok['cena'].'</td>
+                                    <td style="width: 20%">
+                                        <input class="form-control mr-sm-2" type="number" name="broj" placeholder="Amount" aria-label="Search" style="width: 50%">
+                                    </td>
                                 </tr>
                         </td>
                     </tr>
