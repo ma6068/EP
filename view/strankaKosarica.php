@@ -22,7 +22,8 @@
                 $_SESSION['id_kosarica'] = $podatok['id_kosarica'];
             }
             $sum += ( $podatok['cena'] * $podatok['kolicina'] );
-            echo '<div><table align=center width="100%" border="0" cellpadding="100">
+            echo '
+                <div><table align=center width="100%" border="0" cellpadding="100">
                     <tr>
                         <td align="center" valign="center">
                             <img class="group list-group-image" src="../images/' . $podatok['slika'] . '" alt="" />
@@ -38,14 +39,17 @@
                                     <td style="width: 20%">'.$podatok['opis'].'</td>
                                     <td style="width: 20%">'.$podatok['cena'].'</td>
                                     <td style="width: 20%">
+                                        <form method="POST" action="kosaricaPotvrda.php">
                                         <input class="form-control mr-sm-2" type="number" name="broj" placeholder="Amount" aria-label="Search" style="width: 50%">
+                                        </form>
                                     </td>
                                 </tr>
                         </td>
                     </tr>
                 </table>
                 <a class="btn btn-danger" href="./kosaricaTrganjeKola.php?id_avto=' . $podatok['id_avto'] . '">Delete</a>
-                </div>';
+                </div>
+                ';
         }
         echo '<div style="margin-top: 5%"><h2>Total: '.$sum.'</h2></div>';
         echo '<div style="margin-top: 1%"><a class="btn btn-primary" href="./kosaricaPotvrda.php?id_kosarica=' . $id_kosarica . '">Confirm</a></div>';
