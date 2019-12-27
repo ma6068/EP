@@ -2,7 +2,7 @@
     include 'konekcija.php';
     include 'prodajalecGlava.php';
     
-    $query = "SELECT a.marka, a.cena, a.slika, a.opis, k.id_kosarica, k.datum, k.kolicina, u.ime, u.priimek, u.email, u.telefon "
+    $query = $query = "SELECT a.id_avto, a.marka, a.cena, a.opis, k.id_kosarica, k.datum, k.kolicina, u.ime, u.priimek, u.email, u.telefon "
             . "FROM avto a, kosarica k, kosarica_avto ka, uporabnik u "
             . "WHERE k.status='neobdelano' AND k.id_kosarica=ka.fk_id_k AND ka.fk_id_a=a.id_avto AND u.id_uporabnik=k.fk_id_uporabnik";
     $rezultat = mysqli_query($conn, $query);
@@ -29,11 +29,17 @@
             if ($imaPromena == 'da') {
                 echo '<br></br><h3 align="center">Order number : '.$brojPoracka.'</h3>';
            }
+           $id_avto = $podatok['id_avto'];
            echo '<table align=center width="100%" border="0" cellpadding="100">
                     <tr>
-                        <td align="center" valign="center">
-                            <img class="group list-group-image" src="../images/' . $podatok['slika'] . '" alt="" />
-                            <table style="width:100%">
+                        <td align="center" valign="center">';
+                            $query2 = "SELECT * FROM avto_slika WHERE fk_id_avto='$id_avto'";
+                            $rezultat2 = mysqli_query($conn, $query2);
+                            $podatoci2 = mysqli_num_rows($rezultat2);
+                            while ($podatok2 = mysqli_fetch_assoc($rezultat2)) {
+                                echo '<img class="group list-group-image" src="../images/' . $podatok2['slika'] . '.png" alt="" />';
+                            }
+                            echo '<table style="width:100%">
                                 <tr>
                                     <th>Brand</th>
                                     <th>Description</th>

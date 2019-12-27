@@ -18,9 +18,14 @@
            }
            echo '<table align=center width="100%" border="0" cellpadding="5">
                     <tr>
-                        <td align="center" valign="center">
-                            <img class="group list-group-image" src="../images/' . $podatok['slika'] . '" alt="" />
-                            <table style="width:100%">
+                        <td align="center" valign="center">';
+                            $query2 = "SELECT * FROM avto_slika WHERE fk_id_avto='$id_avto'";
+                            $rezultat2 = mysqli_query($conn, $query2);
+                            $podatoci2 = mysqli_num_rows($rezultat2);
+                            while ($podatok2 = mysqli_fetch_assoc($rezultat2)) {
+                                echo '<img class="group list-group-image" src="../images/' . $podatok2['slika'] . '.png" alt="" />';
+                            }
+                            echo '<table style="width:100%">
                                 <tr>
                                     <th>Brand</th>
                                     <th>Description</th>
