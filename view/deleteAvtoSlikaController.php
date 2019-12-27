@@ -10,7 +10,7 @@
     // ako ima prazno pole 
     if (empty($slika)) {
         $_SESSION["napaka"] = "Please fill in all fields";
-        header('Location: ' . "./addAvtoSlika2.php?id_avto=$id_avto");
+        header('Location: ' . "./deleteAvtoSlika2.php?id_avto=$id_avto");
         exit();
     }
     
