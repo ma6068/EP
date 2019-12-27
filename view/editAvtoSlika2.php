@@ -32,10 +32,10 @@
 			<article class="card-body">
                             <form role="form">
                                 <div class="form-group">
-                                    <input id="slika" name="slika" placeholder="Photos name" class="form-control" type="text" maxlength="20">
+                                    <input id="slika" name="slika" placeholder="Photo name" class="form-control" type="text" maxlength="20">
                                 </div>
                                 <div class="form-group">
-                                    <input id="novaSlika" name="novaSlika" placeholder="New photos name" class="form-control" type="text" maxlength="20">
+                                    <input id="novaSlika" name="novaSlika" placeholder="New photo name" class="form-control" type="text" maxlength="20">
                                 </div>
 				<div class="form-group" id="resetButton">
                                     <button class="btn btn-primary btn-block" type="submit">Save</button>
