@@ -1,5 +1,8 @@
 <?php
+    include 'konekcija.php';
     include 'prodajalecGlava.php';
+    session_start();
+    $_SESSION['id_avto'] = $_GET["id_avto"];
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +11,7 @@
 <head>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<meta charset="utf-8">
-	<title>Add car</title>
+	<title>Edit car</title>
         <link rel="stylesheet" type="text/css" href="./css/all.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -17,29 +20,25 @@
 <body>
     <div>
         <div class="container spacing-bottom">
-            <form class="form-signin" method="POST" action="addAvtoController.php">
+            <?php
+                echo '<form class="form-signin" method="POST" action="editAvtoSlikaController.php">';
+            ?>
             <div class=" row flex-center">
 		<div class="col-md-4 oblik-prijava">
                     <div class=" mt-4">
 			<div class="color-bukvi">
-                            <h2 class="card-title mt-2 text-center">Add car</h2>
+                            <h2 class="card-title mt-2 text-center">Edit car's photo</h2>
 			</div>
 			<article class="card-body">
                             <form role="form">
                                 <div class="form-group">
-                                    <input id="marka" name="marka" placeholder="Brand" class="form-control" type="text" maxlength="20">
+                                    <input id="slika" name="slika" placeholder="Photos name" class="form-control" type="text" maxlength="20">
                                 </div>
                                 <div class="form-group">
-                                    <input id="cena" name="cena" placeholder="Price in $" class="form-control" type="number" min="1" maxlength="10">
-                                </div>
-                                <div class="form-group">
-                                    <input id="aktiven" name="aktiven" placeholder="Active-1 / Deactivated-2" class="form-control" type="number" min="1" maxlength="10">
-                                </div>
-                                <div class="form-group">
-                                    <input id="opis" name="opis" placeholder="Description" class="form-control" type="text" maxlength="100">
+                                    <input id="novaSlika" name="novaSlika" placeholder="New photos name" class="form-control" type="text" maxlength="20">
                                 </div>
 				<div class="form-group" id="resetButton">
-                                    <button class="btn btn-primary btn-block" type="submit">Add</button>
+                                    <button class="btn btn-primary btn-block" type="submit">Save</button>
                                 </div>
                                 <?php
                                 if(isset($_SESSION["napaka"])) {
@@ -65,7 +64,5 @@
 
 
 </html>
-
-
 
 

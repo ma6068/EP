@@ -10,7 +10,7 @@
     $opis = $_POST["opis"];
     
     // ako ima prazno pole
-    if (empty($marka) || empty($slika) || empty($opis) || empty($cena) || empty($aktiven)) {
+    if (empty($marka) || empty($opis) || empty($cena) || empty($aktiven)) {
         $_SESSION["napaka"] = "Please fill in all fields";
         header('Location: ' . "./addAvto.php");
         exit();
@@ -26,7 +26,7 @@
     
     
     // dodaj ja kolata 
-    $query = "INSERT INTO avto (marka, cena, slika, aktiven, opis) VALUES ('$marka', '$cena', '$slika', '$aktiven', '$opis')";
+    $query = "INSERT INTO avto (marka, cena, aktiven, opis) VALUES ('$marka', '$cena', '$aktiven', '$opis')";
     $rezultat = mysqli_query($conn, $query);
     $_SESSION["napaka"] = "Car added successfully";
     header('Location: ' . "./addAvto.php");

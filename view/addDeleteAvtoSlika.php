@@ -42,7 +42,8 @@
                     </tr>
                 </table>
 
-               <a class="btn btn-primary" href="./editAvto2.php?id_avto=' . $id_avto .'">Edit</a>';
+               <a class="btn btn-primary" href="./addAvtoSlika2.php?id_avto=' . $id_avto .'">Add photo</a>
+               <a class="btn btn-danger" href="./deleteAvtoSlika2.php?id_avto=' . $id_avto .'">Delete photo</a>';
         }
     } 
     // nema neobdelani podatoci

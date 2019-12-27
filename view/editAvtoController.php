@@ -5,7 +5,6 @@
     
     $marka = $_POST["marka"];
     $cena = $_POST["cena"];
-    $slika = $_POST["slika"];
     $aktiven = $_POST["aktiven"];
     $opis = $_POST["opis"];
     
@@ -37,13 +36,6 @@
     // cena 
     if (!empty($cena)) {
         $query = "UPDATE avto SET cena='$cena' WHERE id_avto='$id_avto'";
-        $rezultat = mysqli_query($conn, $query);
-        $_SESSION["napaka"] = "Car successfully edited";
-    }
-    
-    // slika 
-    if (!empty($slika)) {
-        $query = "UPDATE avto SET slika='$slika' WHERE id_avto='$id_avto'";
         $rezultat = mysqli_query($conn, $query);
         $_SESSION["napaka"] = "Car successfully edited";
     }
