@@ -1,5 +1,5 @@
 <?php
-
+   session_start();
 ?>
 
 <!DOCTYPE html>
@@ -39,10 +39,10 @@
 				<div class="form-group">
                                     <p>Don't have an account? <a href="/netbeans/EP/view/registracija.php">Create one!</a></p>
 				</div>
-                            <?php
-                                if(isset($_SESSION["napaka"])) {
-                                    echo '<center><p id="reg_err">' . $_SESSION["napaka"] . '</p></center>';
-                                    unset($_SESSION["napaka"]); 
+                                <?php
+                                    if(isset($_SESSION["napaka"])) {
+                                        echo '<center><p id="reg_err">' . $_SESSION["napaka"] . '</p></center>';
+                                        unset($_SESSION["napaka"]); 
                                 }
                                 ?>
 				</form>
@@ -51,7 +51,6 @@
                         </div>
 		</div>
                 </from>
-           
             </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
