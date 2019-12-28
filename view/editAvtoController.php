@@ -11,7 +11,7 @@
     $id_avto = $_SESSION['id_avto'];
     
     // ako se site prazni
-    if (empty($marka) && empty($cena) && empty($slika) && empty($opis) && empty($aktiven)) {
+    if (empty($marka) && empty($cena) && empty($opis) && empty($aktiven)) {
         $_SESSION["napaka"] = "Nothing to change";
         header('Location: ' . "./editAvto2.php?id_avto=$id_avto");
         exit();
