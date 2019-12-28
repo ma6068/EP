@@ -5,7 +5,7 @@
     $idUporabnik = $_SESSION['id_uporabnik'];
     $sum = 0;
     
-    $query = "SELECT a.id_avto, a.marka, a.cena, a.opis, k.datum, k.kolicina, k.id_kosarica "
+    $query = "SELECT a.id_avto, a.marka, a.cena, a.opis, k.datum, ka.kolicina, k.id_kosarica "
             . "FROM avto a, kosarica k, kosarica_avto ka, uporabnik u "
             . "WHERE u.id_uporabnik='$idUporabnik' AND k.status!='oddano' AND k.id_kosarica=ka.fk_id_k AND ka.fk_id_a=a.id_avto AND u.id_uporabnik=k.fk_id_uporabnik";
 

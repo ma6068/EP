@@ -2,7 +2,7 @@
     include 'konekcija.php';
     include 'prodajalecGlava.php';
     
-    $query = $query = "SELECT a.id_avto, a.marka, a.cena, a.opis, k.id_kosarica, k.datum, k.kolicina, u.ime, u.priimek, u.email, u.telefon "
+    $query = $query = "SELECT a.id_avto, a.marka, a.cena, a.opis, k.id_kosarica, k.datum, ka.kolicina, u.ime, u.priimek, u.email, u.telefon "
             . "FROM avto a, kosarica k, kosarica_avto ka, uporabnik u "
             . "WHERE k.status='neobdelano' AND k.id_kosarica=ka.fk_id_k AND ka.fk_id_a=a.id_avto AND u.id_uporabnik=k.fk_id_uporabnik";
     $rezultat = mysqli_query($conn, $query);

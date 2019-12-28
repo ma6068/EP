@@ -15,7 +15,7 @@
     // uporabnikot nema kosarica (zatoa praveme kosarica)
     if ($brojPodatoci == 0) {
         $datum = date("Y-m-d h:m:s");
-        $query = "INSERT INTO kosarica(datum, status, kolicina, fk_id_uporabnik) VALUES ('$datum', 'oddano', '1', '$idUporabnik')";
+        $query = "INSERT INTO kosarica(datum, status, fk_id_uporabnik) VALUES ('$datum', 'oddano', '$idUporabnik')";
         $rezultat = mysqli_query($conn, $query);
         
         // go zemame id-to od kosaricata so ja napravivme 
@@ -35,7 +35,7 @@
     
     // taa kola ja nema vo kosaricata pa ja dodavame
     if ($brojPodatoci == 0) {
-        $query = "INSERT INTO kosarica_avto(fk_id_k, fk_id_a) VALUES('$id_kosarica', '$id_avto')";
+        $query = "INSERT INTO kosarica_avto(fk_id_k, fk_id_a, kolicina) VALUES('$id_kosarica', '$id_avto', '1')";
         $rezultat = mysqli_query($conn, $query);
     }
     
