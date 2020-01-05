@@ -24,18 +24,6 @@
         exit();
     }
     
-    // vidi dali imas uporabnik so takov email
-    $query = "SELECT * FROM uporabnik WHERE email='$email'";
-    $rezultat = mysqli_query($conn, $query);
-    $brojPodatoci = mysqli_num_rows($rezultat);
-    $podatoci = mysqli_fetch_assoc($rezultat);
-    if($brojPodatoci > 0) {
-        mysqli_stmt_close($sql); 
-        mysqli_close($conn);
-        $_SESSION["napaka"] = "User with that email doesn't exists";
-        header('Location: ' . "./prodajalecEditClient2.php?id_uporabnik=$id_uporabnik");
-        exit();
-    }
     
     // imeto
     if (!empty($ime)) {
@@ -67,47 +55,251 @@
         $rezultat = mysqli_query($conn, $query);
         $_SESSION["napaka"] = "Changes successfully saved";
     }
+    
+    
     // postna_stevilka
     if (!empty($postna_stevilka)) {
+        // go zemame id-to na adresata na uporabnikot
         $query = "SELECT fk_id_naslov FROM uporabnik WHERE id_uporabnik='$id_uporabnik'";
         $rezultat = mysqli_query($conn, $query);
         $podatoci = mysqli_fetch_assoc($rezultat);
         $fk_id_naslov = $podatoci['fk_id_naslov'];
-        $query = "UPDATE naslov SET postna_stevilka='$postna_stevilka' WHERE id_naslov='$fk_id_naslov'";
-        $rezultat = mysqli_query($conn, $query);
-        $_SESSION["napaka"] = "Changes successfully saved";
-    }
         
-    // hisna_stevilka
-    if (!empty($hisna_stevilka)) {
-        $query = "SELECT fk_id_naslov FROM uporabnik WHERE id_uporabnik='$id_uporabnik'";
+        // gi zemame podatocite na starata adresa na uporabnikot
+        $queryStaraAdresa = "SELECT * FROM naslov WHERE id_naslov='$fk_id_naslov'";
+        $rezultatStaraAdresa = mysqli_query($conn, $queryStaraAdresa);
+        $podatociStaraAdresa = mysqli_fetch_assoc($rezultatStaraAdresa);
+        $m = $podatociStaraAdresa['mesto'];
+        $u = $podatociStaraAdresa['ulica'];
+        $hs = $podatociStaraAdresa['hisna_stevilka'];
+        
+        // proveruvame kolku luge ja koristat starata adresa 
+        $queryPostoiStaraAdresa = "SELECT * FROM uporabnik WHERE fk_id_naslov='$fk_id_naslov'";
+        $rezultatPostoiStaraAdresa = mysqli_query($conn, $queryPostoiStaraAdresa);
+        $brojPodatociStaraAdresa = mysqli_num_rows($rezultatPostoiStaraAdresa);
+        
+        // proveruvame dali novata adresa veke postoi
+        $queryPostoiNovaAdresa = "SELECT * FROM naslov WHERE postna_stevilka='$postna_stevilka' AND mesto='$m' AND ulica='$u' AND hisna_stevilka='$hs'";
+        $rezultatPostoiNovaAdresa = mysqli_query($conn, $queryPostoiNovaAdresa);
+        $podatociNovaAdresa = mysqli_fetch_assoc($rezultatPostoiNovaAdresa);
+        $brojPodatociNovaAdresa = mysqli_num_rows($rezultatPostoiNovaAdresa);
+        
+        // zapomni id na starata adresa
+        $starId = $fk_id_naslov;
+        
+        // novata adresa veke postoi
+        if ($brojPodatociNovaAdresa > 0) {   
+            // go zemame id-to na novata adresa
+            $fk_id_naslov = $podatociNovaAdresa['id_naslov'];
+        }
+        // novata adresa ne postoi
+        else {
+            // ja dodavame novata adresa 
+            $query = "INSERT INTO naslov(postna_stevilka, mesto, ulica, hisna_stevilka) VALUES('$postna_stevilka', '$m', '$u', '$hs')";
+            $rezultat = mysqli_query($conn, $query);
+            
+            // go zemame id-to od novata adresa
+            $query = "SELECT * FROM naslov WHERE postna_stevilka='$postna_stevilka' AND mesto='$m' AND ulica='$u' AND hisna_stevilka='$hs'";
+            $rezultat = mysqli_query($conn, $query);
+            $podatoci = mysqli_fetch_assoc($rezultat);
+            $brojPodatoci = mysqli_num_rows($rezultat);
+            $fk_id_naslov = $podatoci['id_naslov'];
+        }
+                        
+        // menuvame fk_id_naslov vo uporabnik
+        $query = "UPDATE uporabnik SET fk_id_naslov='$fk_id_naslov' WHERE id_uporabnik='$id_uporabnik'";
         $rezultat = mysqli_query($conn, $query);
-        $podatoci = mysqli_fetch_assoc($rezultat);
-        $fk_id_naslov = $podatoci['fk_id_naslov'];
-        $query = "UPDATE naslov SET hisna_stevilka='$hisna_stevilka' WHERE id_naslov='$fk_id_naslov'";
-        $rezultat = mysqli_query($conn, $query);
+        // ako starata adresa nikoj ne ja koristi ja briseme
+        if ($brojPodatociStaraAdresa == 1) {
+            $query = "DELETE FROM naslov WHERE id_naslov='$starId'";
+            $rezultat = mysqli_query($conn, $query);
+        }
         $_SESSION["napaka"] = "Changes successfully saved";
     }
-    // mesto
+    
+        
+    // mesto 
     if (!empty($mesto)) {
+        // go zemame id-to na adresata na uporabnikot
         $query = "SELECT fk_id_naslov FROM uporabnik WHERE id_uporabnik='$id_uporabnik'";
         $rezultat = mysqli_query($conn, $query);
         $podatoci = mysqli_fetch_assoc($rezultat);
         $fk_id_naslov = $podatoci['fk_id_naslov'];
-        $query = "UPDATE naslov SET mesto='$mesto' WHERE id_naslov='$fk_id_naslov'";
+        
+        // gi zemame podatocite na starata adresa na uporabnikot
+        $queryStaraAdresa = "SELECT * FROM naslov WHERE id_naslov='$fk_id_naslov'";
+        $rezultatStaraAdresa = mysqli_query($conn, $queryStaraAdresa);
+        $podatociStaraAdresa = mysqli_fetch_assoc($rezultatStaraAdresa);
+        $ps = $podatociStaraAdresa['postna_stevilka'];
+        $u = $podatociStaraAdresa['ulica'];
+        $hs = $podatociStaraAdresa['hisna_stevilka'];
+        
+        // proveruvame kolku luge ja koristat starata adresa 
+        $queryPostoiStaraAdresa = "SELECT * FROM uporabnik WHERE fk_id_naslov='$fk_id_naslov'";
+        $rezultatPostoiStaraAdresa = mysqli_query($conn, $queryPostoiStaraAdresa);
+        $brojPodatociStaraAdresa = mysqli_num_rows($rezultatPostoiStaraAdresa);
+        
+        // proveruvame dali novata adresa veke postoi
+        $queryPostoiNovaAdresa = "SELECT * FROM naslov WHERE postna_stevilka='$ps' AND mesto='$mesto' AND ulica='$u' AND hisna_stevilka='$hs'";
+        $rezultatPostoiNovaAdresa = mysqli_query($conn, $queryPostoiNovaAdresa);
+        $podatociNovaAdresa = mysqli_fetch_assoc($rezultatPostoiNovaAdresa);
+        $brojPodatociNovaAdresa = mysqli_num_rows($rezultatPostoiNovaAdresa);
+        
+        // zapomni id na starata adresa
+        $starId = $fk_id_naslov;
+        
+        // novata adresa veke postoi
+        if ($brojPodatociNovaAdresa > 0) {   
+            // go zemame id-to na novata adresa
+            $fk_id_naslov = $podatociNovaAdresa['id_naslov'];
+        }
+        // novata adresa ne postoi
+        else {
+            // ja dodavame novata adresa 
+            $query = "INSERT INTO naslov(postna_stevilka, mesto, ulica, hisna_stevilka) VALUES('$ps', '$mesto', '$u', '$hs')";
+            $rezultat = mysqli_query($conn, $query);
+            
+            // go zemame id-to od novata adresa
+            $query = "SELECT * FROM naslov WHERE postna_stevilka='$ps' AND mesto='$mesto' AND ulica='$u' AND hisna_stevilka='$hs'";
+            $rezultat = mysqli_query($conn, $query);
+            $podatoci = mysqli_fetch_assoc($rezultat);
+            $brojPodatoci = mysqli_num_rows($rezultat);
+            $fk_id_naslov = $podatoci['id_naslov'];
+        }
+                        
+        // menuvame fk_id_naslov vo uporabnik
+        $query = "UPDATE uporabnik SET fk_id_naslov='$fk_id_naslov' WHERE id_uporabnik='$id_uporabnik'";
         $rezultat = mysqli_query($conn, $query);
+        // ako starata adresa nikoj ne ja koristi ja briseme
+        if ($brojPodatociStaraAdresa == 1) {
+            $query = "DELETE FROM naslov WHERE id_naslov='$starId'";
+            $rezultat = mysqli_query($conn, $query);
+        }
         $_SESSION["napaka"] = "Changes successfully saved";
     }
+    
+    
     // ulica
     if (!empty($ulica)) {
+        // go zemame id-to na adresata na uporabnikot
         $query = "SELECT fk_id_naslov FROM uporabnik WHERE id_uporabnik='$id_uporabnik'";
         $rezultat = mysqli_query($conn, $query);
         $podatoci = mysqli_fetch_assoc($rezultat);
         $fk_id_naslov = $podatoci['fk_id_naslov'];
-        $query = "UPDATE naslov SET ulica='$ulica' WHERE id_naslov='$fk_id_naslov'";
+        
+        // gi zemame podatocite na starata adresa na uporabnikot
+        $queryStaraAdresa = "SELECT * FROM naslov WHERE id_naslov='$fk_id_naslov'";
+        $rezultatStaraAdresa = mysqli_query($conn, $queryStaraAdresa);
+        $podatociStaraAdresa = mysqli_fetch_assoc($rezultatStaraAdresa);
+        $m = $podatociStaraAdresa['mesto'];
+        $ps = $podatociStaraAdresa['postna_stevilka'];
+        $hs = $podatociStaraAdresa['hisna_stevilka'];
+        
+        // proveruvame kolku luge ja koristat starata adresa 
+        $queryPostoiStaraAdresa = "SELECT * FROM uporabnik WHERE fk_id_naslov='$fk_id_naslov'";
+        $rezultatPostoiStaraAdresa = mysqli_query($conn, $queryPostoiStaraAdresa);
+        $brojPodatociStaraAdresa = mysqli_num_rows($rezultatPostoiStaraAdresa);
+        
+        // proveruvame dali novata adresa veke postoi
+        $queryPostoiNovaAdresa = "SELECT * FROM naslov WHERE postna_stevilka='$ps' AND mesto='$m' AND ulica='$ulica' AND hisna_stevilka='$hs'";
+        $rezultatPostoiNovaAdresa = mysqli_query($conn, $queryPostoiNovaAdresa);
+        $podatociNovaAdresa = mysqli_fetch_assoc($rezultatPostoiNovaAdresa);
+        $brojPodatociNovaAdresa = mysqli_num_rows($rezultatPostoiNovaAdresa);
+        
+        // zapomni id na starata adresa
+        $starId = $fk_id_naslov;
+        
+        // novata adresa veke postoi
+        if ($brojPodatociNovaAdresa > 0) {   
+            // go zemame id-to na novata adresa
+            $fk_id_naslov = $podatociNovaAdresa['id_naslov'];
+        }
+        // novata adresa ne postoi
+        else {
+            // ja dodavame novata adresa 
+            $query = "INSERT INTO naslov(postna_stevilka, mesto, ulica, hisna_stevilka) VALUES('$ps', '$m', '$ulica', '$hs')";
+            $rezultat = mysqli_query($conn, $query);
+            
+            // go zemame id-to od novata adresa
+            $query = "SELECT * FROM naslov WHERE postna_stevilka='$ps' AND mesto='$m' AND ulica='$ulica' AND hisna_stevilka='$hs'";
+            $rezultat = mysqli_query($conn, $query);
+            $podatoci = mysqli_fetch_assoc($rezultat);
+            $brojPodatoci = mysqli_num_rows($rezultat);
+            $fk_id_naslov = $podatoci['id_naslov'];
+        }
+                        
+        // menuvame fk_id_naslov vo uporabnik
+        $query = "UPDATE uporabnik SET fk_id_naslov='$fk_id_naslov' WHERE id_uporabnik='$id_uporabnik'";
         $rezultat = mysqli_query($conn, $query);
+        // ako starata adresa nikoj ne ja koristi ja briseme
+        if ($brojPodatociStaraAdresa == 1) {
+            $query = "DELETE FROM naslov WHERE id_naslov='$starId'";
+            $rezultat = mysqli_query($conn, $query);
+        }
         $_SESSION["napaka"] = "Changes successfully saved";
     }
+    
+    
+    // hisna stevilka
+    if (!empty($hisna_stevilka)) {
+        // go zemame id-to na adresata na uporabnikot
+        $query = "SELECT fk_id_naslov FROM uporabnik WHERE id_uporabnik='$id_uporabnik'";
+        $rezultat = mysqli_query($conn, $query);
+        $podatoci = mysqli_fetch_assoc($rezultat);
+        $fk_id_naslov = $podatoci['fk_id_naslov'];
+        
+        // gi zemame podatocite na starata adresa na uporabnikot
+        $queryStaraAdresa = "SELECT * FROM naslov WHERE id_naslov='$fk_id_naslov'";
+        $rezultatStaraAdresa = mysqli_query($conn, $queryStaraAdresa);
+        $podatociStaraAdresa = mysqli_fetch_assoc($rezultatStaraAdresa);
+        $m = $podatociStaraAdresa['mesto'];
+        $u = $podatociStaraAdresa['ulica'];
+        $ps = $podatociStaraAdresa['postna_stevilka'];
+        
+        // proveruvame kolku luge ja koristat starata adresa 
+        $queryPostoiStaraAdresa = "SELECT * FROM uporabnik WHERE fk_id_naslov='$fk_id_naslov'";
+        $rezultatPostoiStaraAdresa = mysqli_query($conn, $queryPostoiStaraAdresa);
+        $brojPodatociStaraAdresa = mysqli_num_rows($rezultatPostoiStaraAdresa);
+        
+        // proveruvame dali novata adresa veke postoi
+        $queryPostoiNovaAdresa = "SELECT * FROM naslov WHERE postna_stevilka='$ps' AND mesto='$m' AND ulica='$u' AND hisna_stevilka='$hisna_stevilka'";
+        $rezultatPostoiNovaAdresa = mysqli_query($conn, $queryPostoiNovaAdresa);
+        $podatociNovaAdresa = mysqli_fetch_assoc($rezultatPostoiNovaAdresa);
+        $brojPodatociNovaAdresa = mysqli_num_rows($rezultatPostoiNovaAdresa);
+        
+        // zapomni id na starata adresa
+        $starId = $fk_id_naslov;
+        
+        // novata adresa veke postoi
+        if ($brojPodatociNovaAdresa > 0) {   
+            // go zemame id-to na novata adresa
+            $fk_id_naslov = $podatociNovaAdresa['id_naslov'];
+        }
+        // novata adresa ne postoi
+        else {
+            // ja dodavame novata adresa 
+            $query = "INSERT INTO naslov(postna_stevilka, mesto, ulica, hisna_stevilka) VALUES('$ps', '$m', '$u', '$hisna_stevilka')";
+            $rezultat = mysqli_query($conn, $query);
+            
+            // go zemame id-to od novata adresa
+            $query = "SELECT * FROM naslov WHERE postna_stevilka='$ps' AND mesto='$m' AND ulica='$u' AND hisna_stevilka='$hisna_stevilka'";
+            $rezultat = mysqli_query($conn, $query);
+            $podatoci = mysqli_fetch_assoc($rezultat);
+            $brojPodatoci = mysqli_num_rows($rezultat);
+            $fk_id_naslov = $podatoci['id_naslov'];
+        }
+                        
+        // menuvame fk_id_naslov vo uporabnik
+        $query = "UPDATE uporabnik SET fk_id_naslov='$fk_id_naslov' WHERE id_uporabnik='$id_uporabnik'";
+        $rezultat = mysqli_query($conn, $query);
+        // ako starata adresa nikoj ne ja koristi ja briseme
+        if ($brojPodatociStaraAdresa == 1) {
+            $query = "DELETE FROM naslov WHERE id_naslov='$starId'";
+            $rezultat = mysqli_query($conn, $query);
+        }
+        $_SESSION["napaka"] = "Changes successfully saved";
+    }
+    
     header('Location: ' . "./prodajalecEditClient2.php?id_uporabnik=$id_uporabnik");
     exit();
 ?>

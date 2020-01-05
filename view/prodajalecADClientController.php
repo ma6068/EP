@@ -29,6 +29,27 @@
         exit();
     }
     
+    // gresno nastaven status
+    if ($status != 'aktiven' && $status != 'deaktiviran') {
+        $_SESSION["napaka"] = "Status can be only aktiven or deaktiviran";
+        header('Location: ' . "./prodajalecADClient.php");
+        exit();
+    }
+    
+    // statusot e veke aktiven i probame pak da go stavime aktiven
+    if ($status == 'aktiven' && $podatoci['status']=='aktiven') {
+        $_SESSION["napaka"] = "Client is already activated";
+        header('Location: ' . "./prodajalecADClient.php");
+        exit();
+    }
+    
+    // statusot e veke deaktiviran i probame pak da go stavime deaktiviran
+    if ($status == 'deaktiviran' && $podatoci['status']=='deaktiviran') {
+        $_SESSION["napaka"] = "Client is already deactivated";
+        header('Location: ' . "./prodajalecADClient.php");
+        exit();
+    }
+    
     // smeni go statusot 
     $id=$podatoci['id_uporabnik'];
     $query = "UPDATE uporabnik SET status='$status' WHERE id_uporabnik='$id'";
