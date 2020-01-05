@@ -1,8 +1,12 @@
 <?php
+    session_start();
+    if($_SERVER["HTTPS"] != "on") {
+	header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
+        exit();
+    }
     include 'konekcija.php';
     include 'strankaGlava.php';
     $_SESSION['id_avto'] = $_GET["id_avto"];
-    session_start();
 ?>
 
 <!DOCTYPE html>
