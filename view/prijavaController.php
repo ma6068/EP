@@ -54,7 +54,7 @@
                     $_SESSION['priimek'] = $podatoci['priimek'];
                     $_SESSION['email'] = $podatoci['email'];
                     $_SESSION['uloga'] = $podatoci['uloga'];
-                    $_SESSION["napaka"] = "Uspesno !";
+                    //$_SESSION["napaka"] = "Uspesno !";
                     
                     if ($_SESSION['uloga']=='admin') {
                         header('Location: ' . "./editAdmin.php");
