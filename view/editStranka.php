@@ -27,38 +27,32 @@
 			<article class="card-body">
                             <form role="form">
                                 <div class="form-group">
-                                    <input id="ime" name="ime" placeholder="Current name" class="form-control" type="text" maxlength="20">
+                                    <input id="name" name="ime" placeholder="New name" class="form-control" type="text" maxlength="20">
                                 </div>
                                 <div class="form-group">
-                                    <input id="novoIme" name="novoIme" placeholder="New name" class="form-control" type="text" maxlength="20">
+                                    <input id="surname" name="priimek" placeholder="New surname" class="form-control" type="text" maxlength="20">
                                 </div>
                                 <div class="form-group">
-                                    <input id="priimek" name="priimek" placeholder="Current surname" class="form-control" type="text" maxlength="20">
+                                    <input id="postna_stevilka" name="postna_stevilka" placeholder="New postal code" class="form-control" type="number" maxlength="4">
                                 </div>
                                 <div class="form-group">
-                                    <input id="novPriimek" name="novPriimek" placeholder="New surname" class="form-control" type="text" maxlength="20">
+                                    <input id="mesto" name="mesto" placeholder="New city" class="form-control" type="text" maxlength="30">
                                 </div>
                                 <div class="form-group">
-                                    <input id="email" name="email" placeholder="Current E-mail" class="form-control" type="email" maxlength="30">
-				</div>
-                                <div class="form-group">
-                                    <input id="email" name="novEmail" placeholder="New E-mail" class="form-control" type="email" maxlength="30">
-				</div>
-                                <div class="form-group">
-                                    <input id="telefon" name="telefon" placeholder="Current phone number" class="form-control" type="text" maxlength="20">
+                                    <input id="ulica" name="ulica" placeholder="New Street" class="form-control" type="text" maxlength="30">
                                 </div>
                                 <div class="form-group">
-                                    <input id="novTelefon" name="novTelefon" placeholder="New phone number" class="form-control" type="text" maxlength="20">
+                                    <input id="hisna_stevilka" name="hisna_stevilka" placeholder="New street Number" class="form-control" type="text" maxlength="30">
+                                </div>
+                                <div class="form-group" id="PhoneNumber">
+                                    <input id="telefon" name="telefon" placeholder="New phone number" class="form-control" type="text" maxlength="30">
                                 </div>
                                 <div class="form-group">
-                                    <input id="geslo" name="geslo" placeholder="Current Password" class="form-control" type="password" maxlength="30">
-				</div>
-				<div class="form-group">
-                                    <input id="novoGeslo" name="novoGeslo" placeholder="New Password" class="form-control" type="password" maxlength="30">
-				</div>
+                                    <input id="email" name="email" placeholder="New e-mail" class="form-control" type="email" maxlength="30">
+                                </div>
                                 <div class="form-group">
-                                    <p><a href="/netbeans/EP/view/editAdresa.php">Change address</a></p>
-				</div>
+                                    <input id="geslo" name="geslo" placeholder="New password" class="form-control" type="password" maxlength="30">
+                                </div>
 				<div class="form-group" id="resetButton">
                                     <button class="btn btn-primary btn-block" type="submit">Save Changes</button>
                                 </div>

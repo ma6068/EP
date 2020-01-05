@@ -3,158 +3,303 @@
     session_start();
     include 'konekcija.php';
     
-    $ime = $_POST["ime"];
-    $novoIme = $_POST["novoIme"];
-    $priimek = $_POST["priimek"];
-    $novPriimek = $_POST["novPriimek"];
-    $email = $_POST["email"];
-    $novEmail = $_POST["novEmail"];
-    $geslo = $_POST["geslo"];
-    $novoGeslo = $_POST["novoGeslo"];
-    $telefon = $_POST['telefon'];
-    $novTelefon = $_POST['novTelefon'];
+    $id_uporabnik = $_SESSION['id_uporabnik'];
     
-    // ako se site prazni
-    if (empty($ime) && empty($novoIme) && empty($priimek) && empty($novPriimek) 
-            && empty($email) && empty($novEmail) && empty($geslo) && empty($novoGeslo) && empty($telefon) && empty($novTelefon)) {
+    $ime = $_POST["ime"];
+    $priimek = $_POST["priimek"];
+    $postna_stevilka = $_POST["postna_stevilka"];
+    $mesto = $_POST["mesto"];
+    $ulica = $_POST["ulica"];
+    $hisna_stevilka = $_POST["hisna_stevilka"];
+    $telefon = $_POST["telefon"];
+    $email = $_POST["email"];
+    $geslo = $_POST["geslo"];
+    
+    
+    // site polinja se prazni
+    if (empty($ime) && empty($priimek) && empty($postna_stevilka) && empty($mesto) 
+            && empty($ulica) && empty($hisna_stevilka) && empty($telefon) && empty($email) && empty($geslo) && empty($ponoviGeslo)) {
         $_SESSION["napaka"] = "Nothing to change";
         header('Location: ' . "./editStranka.php");
         exit();
     }
     
-    // ako ednoto od polinjata e prazno a drugoto ne znaci deka ima gresno ispolneto
-    if (empty($ime) && !empty($novoIme) || !empty($ime) && empty($novoIme)) {
-        $_SESSION["napaka"] = "Check current or new name";
-        header('Location: ' . "./editStranka.php");
-        exit();
-    }
-    if (empty($priimek) && !empty($novPriimek) || !empty($priimek) && empty($novPriimek)) {
-        $_SESSION["napaka"] = "Check current or new surname";
-        header('Location: ' . "./editStranka.php");
-        exit();
-    }
-    if (empty($email) && !empty($novEmail) || !empty($email) && empty($novEmail)) {
-        $_SESSION["napaka"] = "Check current or new email";
-        header('Location: ' . "./editStranka.php");
-        exit();
-    }
-    if (empty($geslo) && !empty($novoGeslo) || !empty($geslo) && empty($novoGeslo)) {
-        $_SESSION["napaka"] = "Check current or new password";
-        header('Location: ' . "./editStranka.php");
-        exit();
-    }
-    if (empty($telefon) && !empty($novTelefon) || !empty($telefon) && empty($novTelefon)) {
-        $_SESSION["napaka"] = "Check current or new phone number";
-        header('Location: ' . "./editStranka.php");
-        exit();
-    }
     
-    // proveri koi se okej popolneti i napravi promeni 
-    // ime 
-    if (!empty($ime) && !empty($novoIme)) {
-        // proveri dali e toa stvarno negovoto ime
-        $sega = $_SESSION['id_uporabnik'];
-        $query = "SELECT ime FROM uporabnik WHERE id_uporabnik='$sega'";
+    // imeto
+    if (!empty($ime)) {
+        $query = "UPDATE uporabnik SET ime='$ime' WHERE id_uporabnik='$id_uporabnik'";
         $rezultat = mysqli_query($conn, $query);
-        $brojPodatoci = mysqli_num_rows($rezultat);
-        $podatoci = mysqli_fetch_assoc($rezultat);
-        if ($podatoci['ime'] != $ime) {
-            $_SESSION["napaka"] = "Wrong current name";
-            header('Location: ' . "./editProdajalec.php");
-            exit();
-        }
-        else {
-            $query = "UPDATE uporabnik SET ime='$novoIme' WHERE id_uporabnik='$sega'";
-            $rezultat = mysqli_query($conn, $query);
-            $_SESSION["napaka"] = "Changes successfully saved";
-            header('Location: ' . "./editProdajalec.php");
-            //exit();
-        }
+        $_SESSION["napaka"] = "Changes successfully saved";
     }
-    // priimek
-    if (!empty($priimek) && !empty($novPriimek)) {
-        // proveri dali e toa stvarno negovoto prezime
-        $sega = $_SESSION['id_uporabnik'];
-        $query = "SELECT priimek FROM uporabnik WHERE id_uporabnik='$sega'";
+    // prezime
+    if (!empty($priimek)) {
+        $query = "UPDATE uporabnik SET priimek='$priimek' WHERE id_uporabnik='$id_uporabnik'";
         $rezultat = mysqli_query($conn, $query);
-        $brojPodatoci = mysqli_num_rows($rezultat);
-        $podatoci = mysqli_fetch_assoc($rezultat);
-        if ($podatoci['priimek'] != $priimek) {
-            $_SESSION["napaka"] = "Wrong current surname";
-            header('Location: ' . "./editProdajalec.php");
-            exit();
-        }
-        else {
-            $query = "UPDATE uporabnik SET priimek='$novPriimek' WHERE id_uporabnik='$sega'";
-            $rezultat = mysqli_query($conn, $query);
-            $_SESSION["napaka"] = "Changes successfully saved";
-            header('Location: ' . "./editProdajalec.php");
-            //exit();
-        }
+        $_SESSION["napaka"] = "Changes successfully saved";
     }
     // email
-    if (!empty($email) && !empty($novEmail)) {
-        // proveri dali e toa stvarno negovoto prezime
-        $sega = $_SESSION['id_uporabnik'];
-        $query = "SELECT email FROM uporabnik WHERE id_uporabnik='$sega'";
+    if (!empty($email)) {
+        $query = "UPDATE uporabnik SET email='$email' WHERE id_uporabnik='$id_uporabnik'";
         $rezultat = mysqli_query($conn, $query);
-        $brojPodatoci = mysqli_num_rows($rezultat);
-        $podatoci = mysqli_fetch_assoc($rezultat);
-        if ($podatoci['email'] != $email) {
-            $_SESSION["napaka"] = "Wrong current email";
-            header('Location: ' . "./editProdajalec.php");
-            exit();
-        }
-        else {
-            $query = "UPDATE uporabnik SET email='$novEmail' WHERE id_uporabnik='$sega'";
-            $rezultat = mysqli_query($conn, $query);
-            $_SESSION["napaka"] = "Changes successfully saved";
-            header('Location: ' . "./editProdajalec.php");
-            //exit();
-        }
+        $_SESSION["napaka"] = "Changes successfully saved";
     }
-    // pasvord
-    if (!empty($geslo) && !empty($novoGeslo)) {
-        // proveri dali e toa stvarno negoviot pasvord
-        $sega = $_SESSION['id_uporabnik'];
-        $query = "SELECT geslo FROM uporabnik WHERE id_uporabnik='$sega'";
+    // geslo
+    if (!empty($geslo)) {
+        $query = "UPDATE uporabnik SET geslo='$geslo' WHERE id_uporabnik='$id_uporabnik'";
         $rezultat = mysqli_query($conn, $query);
-        $brojPodatoci = mysqli_num_rows($rezultat);
-        $podatoci = mysqli_fetch_assoc($rezultat);
-        if ($podatoci['geslo'] != $geslo) {
-            $_SESSION["napaka"] = "Wrong current password";
-            header('Location: ' . "./editProdajalec.php");
-            exit();
-        }
-        else {
-            $query = "UPDATE uporabnik SET geslo='$novoGeslo' WHERE id_uporabnik='$sega'";
-            $rezultat = mysqli_query($conn, $query);
-            $_SESSION["napaka"] = "Changes successfully saved";
-            header('Location: ' . "./editProdajalec.php");
-            //exit();
-        }
+        $_SESSION["napaka"] = "Changes successfully saved";
     }
-    // telefon 
-    if (!empty($telefon) && !empty($novTelefon)) {
-        // proveri dali e toa stvarno negovoto ime
-        $sega = $_SESSION['id_uporabnik'];
-        $query = "SELECT telefon FROM uporabnik WHERE id_uporabnik='$sega'";
+    // telefon
+    if (!empty($telefon)) {
+        $query = "UPDATE uporabnik SET telefon='$telefon' WHERE id_uporabnik='$id_uporabnik'";
         $rezultat = mysqli_query($conn, $query);
-        $brojPodatoci = mysqli_num_rows($rezultat);
-        $podatoci = mysqli_fetch_assoc($rezultat);
-        if ($podatoci['telefon'] != $telefon) {
-            $_SESSION["napaka"] = "Wrong current phone number";
-            header('Location: ' . "./editProdajalec.php");
-            exit();
-        }
-        else {
-            $query = "UPDATE uporabnik SET telefon='$novTelefon' WHERE id_uporabnik='$sega'";
-            $rezultat = mysqli_query($conn, $query);
-            $_SESSION["napaka"] = "Changes successfully saved";
-            header('Location: ' . "./editProdajalec.php");
-            //exit();
-        }
+        $_SESSION["napaka"] = "Changes successfully saved";
     }
     
+    
+    // postna_stevilka
+    if (!empty($postna_stevilka)) {
+        // go zemame id-to na adresata na uporabnikot
+        $query = "SELECT fk_id_naslov FROM uporabnik WHERE id_uporabnik='$id_uporabnik'";
+        $rezultat = mysqli_query($conn, $query);
+        $podatoci = mysqli_fetch_assoc($rezultat);
+        $fk_id_naslov = $podatoci['fk_id_naslov'];
+        
+        // gi zemame podatocite na starata adresa na uporabnikot
+        $queryStaraAdresa = "SELECT * FROM naslov WHERE id_naslov='$fk_id_naslov'";
+        $rezultatStaraAdresa = mysqli_query($conn, $queryStaraAdresa);
+        $podatociStaraAdresa = mysqli_fetch_assoc($rezultatStaraAdresa);
+        $m = $podatociStaraAdresa['mesto'];
+        $u = $podatociStaraAdresa['ulica'];
+        $hs = $podatociStaraAdresa['hisna_stevilka'];
+        
+        // proveruvame kolku luge ja koristat starata adresa 
+        $queryPostoiStaraAdresa = "SELECT * FROM uporabnik WHERE fk_id_naslov='$fk_id_naslov'";
+        $rezultatPostoiStaraAdresa = mysqli_query($conn, $queryPostoiStaraAdresa);
+        $brojPodatociStaraAdresa = mysqli_num_rows($rezultatPostoiStaraAdresa);
+        
+        // proveruvame dali novata adresa veke postoi
+        $queryPostoiNovaAdresa = "SELECT * FROM naslov WHERE postna_stevilka='$postna_stevilka' AND mesto='$m' AND ulica='$u' AND hisna_stevilka='$hs'";
+        $rezultatPostoiNovaAdresa = mysqli_query($conn, $queryPostoiNovaAdresa);
+        $podatociNovaAdresa = mysqli_fetch_assoc($rezultatPostoiNovaAdresa);
+        $brojPodatociNovaAdresa = mysqli_num_rows($rezultatPostoiNovaAdresa);
+        
+        // zapomni id na starata adresa
+        $starId = $fk_id_naslov;
+        
+        // novata adresa veke postoi
+        if ($brojPodatociNovaAdresa > 0) {   
+            // go zemame id-to na novata adresa
+            $fk_id_naslov = $podatociNovaAdresa['id_naslov'];
+        }
+        // novata adresa ne postoi
+        else {
+            // ja dodavame novata adresa 
+            $query = "INSERT INTO naslov(postna_stevilka, mesto, ulica, hisna_stevilka) VALUES('$postna_stevilka', '$m', '$u', '$hs')";
+            $rezultat = mysqli_query($conn, $query);
+            
+            // go zemame id-to od novata adresa
+            $query = "SELECT * FROM naslov WHERE postna_stevilka='$postna_stevilka' AND mesto='$m' AND ulica='$u' AND hisna_stevilka='$hs'";
+            $rezultat = mysqli_query($conn, $query);
+            $podatoci = mysqli_fetch_assoc($rezultat);
+            $brojPodatoci = mysqli_num_rows($rezultat);
+            $fk_id_naslov = $podatoci['id_naslov'];
+        }
+                        
+        // menuvame fk_id_naslov vo uporabnik
+        $query = "UPDATE uporabnik SET fk_id_naslov='$fk_id_naslov' WHERE id_uporabnik='$id_uporabnik'";
+        $rezultat = mysqli_query($conn, $query);
+        // ako starata adresa nikoj ne ja koristi ja briseme
+        if ($brojPodatociStaraAdresa == 1) {
+            $query = "DELETE FROM naslov WHERE id_naslov='$starId'";
+            $rezultat = mysqli_query($conn, $query);
+        }
+        $_SESSION["napaka"] = "Changes successfully saved";
+    }
+    
+        
+    // mesto 
+    if (!empty($mesto)) {
+        // go zemame id-to na adresata na uporabnikot
+        $query = "SELECT fk_id_naslov FROM uporabnik WHERE id_uporabnik='$id_uporabnik'";
+        $rezultat = mysqli_query($conn, $query);
+        $podatoci = mysqli_fetch_assoc($rezultat);
+        $fk_id_naslov = $podatoci['fk_id_naslov'];
+        
+        // gi zemame podatocite na starata adresa na uporabnikot
+        $queryStaraAdresa = "SELECT * FROM naslov WHERE id_naslov='$fk_id_naslov'";
+        $rezultatStaraAdresa = mysqli_query($conn, $queryStaraAdresa);
+        $podatociStaraAdresa = mysqli_fetch_assoc($rezultatStaraAdresa);
+        $ps = $podatociStaraAdresa['postna_stevilka'];
+        $u = $podatociStaraAdresa['ulica'];
+        $hs = $podatociStaraAdresa['hisna_stevilka'];
+        
+        // proveruvame kolku luge ja koristat starata adresa 
+        $queryPostoiStaraAdresa = "SELECT * FROM uporabnik WHERE fk_id_naslov='$fk_id_naslov'";
+        $rezultatPostoiStaraAdresa = mysqli_query($conn, $queryPostoiStaraAdresa);
+        $brojPodatociStaraAdresa = mysqli_num_rows($rezultatPostoiStaraAdresa);
+        
+        // proveruvame dali novata adresa veke postoi
+        $queryPostoiNovaAdresa = "SELECT * FROM naslov WHERE postna_stevilka='$ps' AND mesto='$mesto' AND ulica='$u' AND hisna_stevilka='$hs'";
+        $rezultatPostoiNovaAdresa = mysqli_query($conn, $queryPostoiNovaAdresa);
+        $podatociNovaAdresa = mysqli_fetch_assoc($rezultatPostoiNovaAdresa);
+        $brojPodatociNovaAdresa = mysqli_num_rows($rezultatPostoiNovaAdresa);
+        
+        // zapomni id na starata adresa
+        $starId = $fk_id_naslov;
+        
+        // novata adresa veke postoi
+        if ($brojPodatociNovaAdresa > 0) {   
+            // go zemame id-to na novata adresa
+            $fk_id_naslov = $podatociNovaAdresa['id_naslov'];
+        }
+        // novata adresa ne postoi
+        else {
+            // ja dodavame novata adresa 
+            $query = "INSERT INTO naslov(postna_stevilka, mesto, ulica, hisna_stevilka) VALUES('$ps', '$mesto', '$u', '$hs')";
+            $rezultat = mysqli_query($conn, $query);
+            
+            // go zemame id-to od novata adresa
+            $query = "SELECT * FROM naslov WHERE postna_stevilka='$ps' AND mesto='$mesto' AND ulica='$u' AND hisna_stevilka='$hs'";
+            $rezultat = mysqli_query($conn, $query);
+            $podatoci = mysqli_fetch_assoc($rezultat);
+            $brojPodatoci = mysqli_num_rows($rezultat);
+            $fk_id_naslov = $podatoci['id_naslov'];
+        }
+                        
+        // menuvame fk_id_naslov vo uporabnik
+        $query = "UPDATE uporabnik SET fk_id_naslov='$fk_id_naslov' WHERE id_uporabnik='$id_uporabnik'";
+        $rezultat = mysqli_query($conn, $query);
+        // ako starata adresa nikoj ne ja koristi ja briseme
+        if ($brojPodatociStaraAdresa == 1) {
+            $query = "DELETE FROM naslov WHERE id_naslov='$starId'";
+            $rezultat = mysqli_query($conn, $query);
+        }
+        $_SESSION["napaka"] = "Changes successfully saved";
+    }
+    
+    
+    // ulica
+    if (!empty($ulica)) {
+        // go zemame id-to na adresata na uporabnikot
+        $query = "SELECT fk_id_naslov FROM uporabnik WHERE id_uporabnik='$id_uporabnik'";
+        $rezultat = mysqli_query($conn, $query);
+        $podatoci = mysqli_fetch_assoc($rezultat);
+        $fk_id_naslov = $podatoci['fk_id_naslov'];
+        
+        // gi zemame podatocite na starata adresa na uporabnikot
+        $queryStaraAdresa = "SELECT * FROM naslov WHERE id_naslov='$fk_id_naslov'";
+        $rezultatStaraAdresa = mysqli_query($conn, $queryStaraAdresa);
+        $podatociStaraAdresa = mysqli_fetch_assoc($rezultatStaraAdresa);
+        $m = $podatociStaraAdresa['mesto'];
+        $ps = $podatociStaraAdresa['postna_stevilka'];
+        $hs = $podatociStaraAdresa['hisna_stevilka'];
+        
+        // proveruvame kolku luge ja koristat starata adresa 
+        $queryPostoiStaraAdresa = "SELECT * FROM uporabnik WHERE fk_id_naslov='$fk_id_naslov'";
+        $rezultatPostoiStaraAdresa = mysqli_query($conn, $queryPostoiStaraAdresa);
+        $brojPodatociStaraAdresa = mysqli_num_rows($rezultatPostoiStaraAdresa);
+        
+        // proveruvame dali novata adresa veke postoi
+        $queryPostoiNovaAdresa = "SELECT * FROM naslov WHERE postna_stevilka='$ps' AND mesto='$m' AND ulica='$ulica' AND hisna_stevilka='$hs'";
+        $rezultatPostoiNovaAdresa = mysqli_query($conn, $queryPostoiNovaAdresa);
+        $podatociNovaAdresa = mysqli_fetch_assoc($rezultatPostoiNovaAdresa);
+        $brojPodatociNovaAdresa = mysqli_num_rows($rezultatPostoiNovaAdresa);
+        
+        // zapomni id na starata adresa
+        $starId = $fk_id_naslov;
+        
+        // novata adresa veke postoi
+        if ($brojPodatociNovaAdresa > 0) {   
+            // go zemame id-to na novata adresa
+            $fk_id_naslov = $podatociNovaAdresa['id_naslov'];
+        }
+        // novata adresa ne postoi
+        else {
+            // ja dodavame novata adresa 
+            $query = "INSERT INTO naslov(postna_stevilka, mesto, ulica, hisna_stevilka) VALUES('$ps', '$m', '$ulica', '$hs')";
+            $rezultat = mysqli_query($conn, $query);
+            
+            // go zemame id-to od novata adresa
+            $query = "SELECT * FROM naslov WHERE postna_stevilka='$ps' AND mesto='$m' AND ulica='$ulica' AND hisna_stevilka='$hs'";
+            $rezultat = mysqli_query($conn, $query);
+            $podatoci = mysqli_fetch_assoc($rezultat);
+            $brojPodatoci = mysqli_num_rows($rezultat);
+            $fk_id_naslov = $podatoci['id_naslov'];
+        }
+                        
+        // menuvame fk_id_naslov vo uporabnik
+        $query = "UPDATE uporabnik SET fk_id_naslov='$fk_id_naslov' WHERE id_uporabnik='$id_uporabnik'";
+        $rezultat = mysqli_query($conn, $query);
+        // ako starata adresa nikoj ne ja koristi ja briseme
+        if ($brojPodatociStaraAdresa == 1) {
+            $query = "DELETE FROM naslov WHERE id_naslov='$starId'";
+            $rezultat = mysqli_query($conn, $query);
+        }
+        $_SESSION["napaka"] = "Changes successfully saved";
+    }
+    
+    
+    // hisna stevilka
+    if (!empty($hisna_stevilka)) {
+        // go zemame id-to na adresata na uporabnikot
+        $query = "SELECT fk_id_naslov FROM uporabnik WHERE id_uporabnik='$id_uporabnik'";
+        $rezultat = mysqli_query($conn, $query);
+        $podatoci = mysqli_fetch_assoc($rezultat);
+        $fk_id_naslov = $podatoci['fk_id_naslov'];
+        
+        // gi zemame podatocite na starata adresa na uporabnikot
+        $queryStaraAdresa = "SELECT * FROM naslov WHERE id_naslov='$fk_id_naslov'";
+        $rezultatStaraAdresa = mysqli_query($conn, $queryStaraAdresa);
+        $podatociStaraAdresa = mysqli_fetch_assoc($rezultatStaraAdresa);
+        $m = $podatociStaraAdresa['mesto'];
+        $u = $podatociStaraAdresa['ulica'];
+        $ps = $podatociStaraAdresa['postna_stevilka'];
+        
+        // proveruvame kolku luge ja koristat starata adresa 
+        $queryPostoiStaraAdresa = "SELECT * FROM uporabnik WHERE fk_id_naslov='$fk_id_naslov'";
+        $rezultatPostoiStaraAdresa = mysqli_query($conn, $queryPostoiStaraAdresa);
+        $brojPodatociStaraAdresa = mysqli_num_rows($rezultatPostoiStaraAdresa);
+        
+        // proveruvame dali novata adresa veke postoi
+        $queryPostoiNovaAdresa = "SELECT * FROM naslov WHERE postna_stevilka='$ps' AND mesto='$m' AND ulica='$u' AND hisna_stevilka='$hisna_stevilka'";
+        $rezultatPostoiNovaAdresa = mysqli_query($conn, $queryPostoiNovaAdresa);
+        $podatociNovaAdresa = mysqli_fetch_assoc($rezultatPostoiNovaAdresa);
+        $brojPodatociNovaAdresa = mysqli_num_rows($rezultatPostoiNovaAdresa);
+        
+        // zapomni id na starata adresa
+        $starId = $fk_id_naslov;
+        
+        // novata adresa veke postoi
+        if ($brojPodatociNovaAdresa > 0) {   
+            // go zemame id-to na novata adresa
+            $fk_id_naslov = $podatociNovaAdresa['id_naslov'];
+        }
+        // novata adresa ne postoi
+        else {
+            // ja dodavame novata adresa 
+            $query = "INSERT INTO naslov(postna_stevilka, mesto, ulica, hisna_stevilka) VALUES('$ps', '$m', '$u', '$hisna_stevilka')";
+            $rezultat = mysqli_query($conn, $query);
+            
+            // go zemame id-to od novata adresa
+            $query = "SELECT * FROM naslov WHERE postna_stevilka='$ps' AND mesto='$m' AND ulica='$u' AND hisna_stevilka='$hisna_stevilka'";
+            $rezultat = mysqli_query($conn, $query);
+            $podatoci = mysqli_fetch_assoc($rezultat);
+            $brojPodatoci = mysqli_num_rows($rezultat);
+            $fk_id_naslov = $podatoci['id_naslov'];
+        }
+                        
+        // menuvame fk_id_naslov vo uporabnik
+        $query = "UPDATE uporabnik SET fk_id_naslov='$fk_id_naslov' WHERE id_uporabnik='$id_uporabnik'";
+        $rezultat = mysqli_query($conn, $query);
+        // ako starata adresa nikoj ne ja koristi ja briseme
+        if ($brojPodatociStaraAdresa == 1) {
+            $query = "DELETE FROM naslov WHERE id_naslov='$starId'";
+            $rezultat = mysqli_query($conn, $query);
+        }
+        $_SESSION["napaka"] = "Changes successfully saved";
+    }
+    
+    header('Location: ' . "./editStranka.php");
+    exit();
 ?>
-
