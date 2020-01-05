@@ -78,7 +78,7 @@
     $dodadeno = mysqli_query($conn, $query);
     if (dodadeno) {
         $_SESSION["napaka"] = "Registration completed successfully";
-        header('Location: ' . "./registracija.php");
+        header('Location: ' . "./prijava.php");
         exit();
     }
     else {
