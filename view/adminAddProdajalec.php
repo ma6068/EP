@@ -39,7 +39,7 @@
                                     <input id="geslo" name="geslo" placeholder="Password" class="form-control" type="password" maxlength="30">
 				</div>
 				<div class="form-group" id="resetButton">
-                                    <button class="btn btn-primary btn-block" type="submit">Save Changes</button>
+                                    <button class="btn btn-primary btn-block" type="submit">Add</button>
                                 </div>
                                 <?php
                                 if(isset($_SESSION["napaka"])) {
