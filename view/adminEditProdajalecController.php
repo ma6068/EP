@@ -53,7 +53,8 @@
     
     // geslo 
     if (!empty($geslo)) {
-        $query = "UPDATE uporabnik SET geslo='$geslo' WHERE id_uporabnik='$id_uporabnik'";
+        $skrienPasvord = password_hash($geslo, PASSWORD_BCRYPT);
+        $query = "UPDATE uporabnik SET geslo='$skrienPasvord' WHERE id_uporabnik='$id_uporabnik'";
         $rezultat = mysqli_query($conn, $query);
         $_SESSION["napaka"] = "Changes successfully saved";
     }

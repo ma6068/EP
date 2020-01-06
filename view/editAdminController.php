@@ -114,17 +114,19 @@
         $rezultat = mysqli_query($conn, $query);
         $brojPodatoci = mysqli_num_rows($rezultat);
         $podatoci = mysqli_fetch_assoc($rezultat);
-        if ($podatoci['geslo'] != $geslo) {
-            $_SESSION["napaka"] = "Wrong current password";
-            header('Location: ' . "./editAdmin.php");
-            exit();
-        }
-        else {
-            $query = "UPDATE uporabnik SET geslo='$novoGeslo' WHERE id_uporabnik='$sega'";
+        // tocen pasvord 
+        if (password_verify($geslo, $podatoci['geslo'])) {
+            $skrienPasvord = password_hash($novoGeslo, PASSWORD_BCRYPT);
+            $query = "UPDATE uporabnik SET geslo='$skrienPasvord' WHERE id_uporabnik='$sega'";
             $rezultat = mysqli_query($conn, $query);
             $_SESSION["napaka"] = "Changes successfully saved";
             header('Location: ' . "./editAdmin.php");
-            //exit();
+        }
+        // gresen pasvord 
+        else {
+            $_SESSION["napaka"] = "Wrong current password";
+            header('Location: ' . "./editAdmin.php");
+            exit();
         }
     }
     

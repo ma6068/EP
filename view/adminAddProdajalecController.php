@@ -28,8 +28,10 @@
         exit();
     }
     
+    $skrienPasvord = password_hash($geslo, PASSWORD_BCRYPT);
+    
     // dodaj go prodavacot
-    $query="INSERT INTO uporabnik(ime, priimek, email, geslo, status, uloga) VALUES('$ime', '$priimek', '$email', '$geslo', 'aktiven', 'prodajalec')";
+    $query="INSERT INTO uporabnik(ime, priimek, email, geslo, status, uloga) VALUES('$ime', '$priimek', '$email', '$skrienPasvord', 'aktiven', 'prodajalec')";
     $rezultat = mysqli_query($conn, $query);
     $brojPodatoci = mysqli_num_rows($rezultat);
     $podatoci = mysqli_fetch_assoc($rezultat);
