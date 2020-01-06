@@ -6,7 +6,7 @@
     <body>
         <?php
         # Avtorizirani uporabniki (to navadno pride iz podatkovne baze)
-        $authorized_users = ["Ana", "Admin"];
+        $authorized_users = ["Ana", "Admin", "Emil"];
 
         # preberemo odjemačev certifikat
         $client_cert = filter_input(INPUT_SERVER, "SSL_CLIENT_CERT");
