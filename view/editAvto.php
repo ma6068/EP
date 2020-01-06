@@ -16,10 +16,10 @@
            $akt = '';
            $id_avto = $podatok['id_avto'];
            if ($podatok['aktiven'] == 1) {
-               $akt = 'Yes';
+               $akt = 'Active';
            }
            else {
-               $akt = 'No';
+               $akt = 'Deactivated';
            }
            echo '<table align=center width="100%" border="0" cellpadding="5">
                     <tr>
@@ -35,7 +35,7 @@
                                     <th>Brand</th>
                                     <th>Description</th>
                                     <th>Price</th>
-                                    <th>Active</th>
+                                    <th>Status</th>
                                 </tr>
                                 <tr>
                                     <td>'.$podatok['marka'].'</td>
@@ -47,7 +47,9 @@
                     </tr>
                 </table>
 
-               <a class="btn btn-primary" href="./editAvto2.php?id_avto=' . $id_avto .'">Edit</a>';
+               <a class="btn btn-primary" href="./editAvto2.php?id_avto=' . $id_avto .'">Edit</a>
+               <a class="btn btn-primary" href="./prodajalecADAvto.php?id_avto=' . $id_avto .'">Change status</a>';
+               
         }
     } 
     // nema neobdelani podatoci

@@ -42,9 +42,6 @@
                                     <input id="cena" name="cena" placeholder="Price in $" class="form-control" type="number" min="1" maxlength="10">
                                 </div>
                                 <div class="form-group">
-                                    <input id="aktiven" name="aktiven" placeholder="Active-1 / Deactivated-2" class="form-control" type="number" min="1" maxlength="10">
-                                </div>
-                                <div class="form-group">
                                     <input id="opis" name="opis" placeholder="Description" class="form-control" type="text" maxlength="100">
                                 </div>
 				<div class="form-group" id="resetButton">

@@ -22,7 +22,6 @@
         $rezultat = mysqli_query($conn, $query);
     }
     $_SESSION['napaka'] = "";
-    $_SESSION['aaa'] = $id_uporabnik;
     header('Location: ' . "./prodajalecEditClient.php");
     exit();
 ?>
