@@ -45,9 +45,6 @@
                                     <a class="nav-link" href="./editAvto.php">Edit car<span class="sr-only"></span></a>
 				</li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="./editAvtoSlika.php">Edit car's photo<span class="sr-only"></span></a>
-				</li>
-                                <li class="nav-item">
                                     <a class="nav-link" href="./prodajalecAddClient.php">Add client<span class="sr-only"></span></a>
 				</li>
                                 <li class="nav-item">

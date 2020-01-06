@@ -48,8 +48,8 @@
                 </table>
 
                <a class="btn btn-primary" href="./editAvto2.php?id_avto=' . $id_avto .'">Edit</a>
-               <a class="btn btn-primary" href="./prodajalecADAvtoController.php?id_avto=' . $id_avto .'">Change status</a>';
-               
+               <a class="btn btn-primary" href="./prodajalecADAvtoController.php?id_avto=' . $id_avto .'">Change status</a>
+               <a class="btn btn-primary" href="./editAvtoSlika.php?id_avto=' . $id_avto .'">Edit photo</a>';
         }
     } 
     // nema neobdelani podatoci
