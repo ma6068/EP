@@ -53,6 +53,17 @@
     
     // geslo 
     if (!empty($geslo)) {
+        // validacija pasvord 
+        $uppercase = preg_match('@[A-Z]@', $geslo);
+        $lowercase = preg_match('@[a-z]@', $geslo);
+        $number = preg_match('@[0-9]@', $geslo);
+        if(!$uppercase || !$lowercase || !$number || strlen($geslo) < 6) {
+            mysqli_stmt_close($sql); 
+            mysqli_close($conn);
+            $_SESSION["napaka"] = "The password must have a uppercase, lowercase letter, number and length of at least 6 characters";
+            header('Location: ' . "./adminEditProdajalec2.php?id_uporabnik=$id_uporabnik");
+            exit();
+        }
         $skrienPasvord = password_hash($geslo, PASSWORD_BCRYPT);
         $query = "UPDATE uporabnik SET geslo='$skrienPasvord' WHERE id_uporabnik='$id_uporabnik'";
         $rezultat = mysqli_query($conn, $query);

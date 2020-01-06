@@ -46,6 +46,18 @@
 	exit();
     }
     
+    // validacija pasvord 
+    $uppercase = preg_match('@[A-Z]@', $geslo);
+    $lowercase = preg_match('@[a-z]@', $geslo);
+    $number = preg_match('@[0-9]@', $geslo);
+    if(!$uppercase || !$lowercase || !$number || strlen($geslo) < 6) {
+        mysqli_stmt_close($sql); 
+        mysqli_close($conn);
+	$_SESSION["napaka"] = "The password must have a uppercase, lowercase letter, number and length of at least 6 characters";
+	header('Location: ' . "./prodajalecAddClient.php");
+	exit();
+    }
+    
     // ako ne postoi go dodavame vo bazata 
     $query = "SELECT id_naslov FROM naslov WHERE postna_stevilka='$postna_stevilka' AND mesto='$mesto' AND ulica='$ulica' AND hisna_stevilka='$hisna_stevilka'";
     $rezultat = mysqli_query($conn, $query);
@@ -69,7 +81,8 @@
     $rezultat = mysqli_query($conn, $query);
     $podatoci = mysqli_fetch_assoc($rezultat);
     $fk_id_naslov = $podatoci['id_naslov'];
-
+    
+    
     // skrien pasvord
     $skrienPasvord = password_hash($geslo, PASSWORD_BCRYPT);
         
