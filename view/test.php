@@ -18,6 +18,7 @@
             //echo("\n");
         }
     }
-    echo $_SESSION['aaa'];
+    $hash = password_hash('Janez123', PASSWORD_BCRYPT);
+    echo ($hash);
 ?>
 

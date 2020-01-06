@@ -37,25 +37,14 @@
         // postoi aktiven uporabnik so takov email, proveri mu go pasvordot
         if ($brojPodatoci > 0) {
             if ($podatoci) {
-                //$p = password_verify($geslo, $podatoci['geslo']);
-                // if ($p == false) {....
-                // gresen pasvord 
-                if ($geslo != $podatoci['geslo']) {
-                    mysqli_stmt_close($sql); 
-                    mysqli_close($conn);
-                    $_SESSION["napaka"] = "Wrong password !";
-                    header('Location: ' . "./prijava.php");
-                    exit();
-                } 
                 // tocen pasvord 
-                else {
+                if (password_verify($geslo, $podatoci['geslo'])) {
                     $_SESSION['id_uporabnik'] = $podatoci['id_uporabnik'];
                     $_SESSION['ime'] = $podatoci['ime'];
                     $_SESSION['priimek'] = $podatoci['priimek'];
                     $_SESSION['email'] = $podatoci['email'];
                     $_SESSION['uloga'] = $podatoci['uloga'];
                     //$_SESSION["napaka"] = "Uspesno !";
-                    
                     if ($_SESSION['uloga']=='admin') {
                         header('Location: ' . "./editAdmin.php");
                     }
@@ -65,6 +54,14 @@
                     if ($_SESSION['uloga']=='stranka') {
                         header('Location: ' . "./editStranka.php");
                     }
+                    exit();
+                }
+                // gresen prasvord 
+                else {
+                    mysqli_stmt_close($sql); 
+                    mysqli_close($conn);
+                    $_SESSION["napaka"] = "Wrong password !";
+                    header('Location: ' . "./prijava.php");
                     exit();
                 }
             }

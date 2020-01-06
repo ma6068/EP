@@ -74,7 +74,7 @@
     $skrienPasvord = password_hash($geslo, PASSWORD_BCRYPT);
         
     // go dodavame uporabnikot
-    $query = "INSERT INTO uporabnik (ime, priimek, email, geslo, telefon, status, uloga, fk_id_naslov) VALUES ('$ime', '$priimek', '$email', '$geslo', '$telefon', 'aktiven', 'stranka', '$fk_id_naslov')";
+    $query = "INSERT INTO uporabnik (ime, priimek, email, geslo, telefon, status, uloga, fk_id_naslov) VALUES ('$ime', '$priimek', '$email', '$skrienPasvord', '$telefon', 'aktiven', 'stranka', '$fk_id_naslov')";
     $dodadeno = mysqli_query($conn, $query);
     if (dodadeno) {
         $_SESSION["napaka"] = "Registration completed successfully";
