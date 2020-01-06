@@ -3,7 +3,7 @@
     include 'konekcija.php';
     session_start();
     
-    $id_avto = $_GET["id_avto"];
+    $id_avto = mysqli_real_escape_string($conn, $_GET["id_avto"]);
     $idUporabnik = $_SESSION['id_uporabnik'];
    
     // prvo proveruvame dali toj uporabnik veke ima kosarica

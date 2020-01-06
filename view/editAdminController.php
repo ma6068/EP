@@ -3,14 +3,14 @@
     session_start();
     include 'konekcija.php';
     
-    $ime = $_POST["ime"];
-    $novoIme = $_POST["novoIme"];
-    $priimek = $_POST["priimek"];
-    $novPriimek = $_POST["novPriimek"];
-    $email = $_POST["email"];
-    $novEmail = $_POST["novEmail"];
-    $geslo = $_POST["geslo"];
-    $novoGeslo = $_POST["novoGeslo"];
+    $ime = mysqli_real_escape_string($conn, $_POST["ime"]);
+    $novoIme = mysqli_real_escape_string($conn, $_POST["novoIme"]);
+    $priimek = mysqli_real_escape_string($conn, $_POST["priimek"]);
+    $novPriimek = mysqli_real_escape_string($conn, $_POST["novPriimek"]);
+    $email = mysqli_real_escape_string($conn, $_POST["email"]);
+    $novEmail = mysqli_real_escape_string($conn, $_POST["novEmail"]);
+    $geslo = mysqli_real_escape_string($conn, $_POST["geslo"]);
+    $novoGeslo = mysqli_real_escape_string($conn, $_POST["novoGeslo"]);
     
     // ako se site prazni
     if (empty($ime) && empty($novoIme) && empty($priimek) && empty($novPriimek) 

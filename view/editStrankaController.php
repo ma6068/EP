@@ -5,15 +5,15 @@
     
     $id_uporabnik = $_SESSION['id_uporabnik'];
     
-    $ime = $_POST["ime"];
-    $priimek = $_POST["priimek"];
-    $postna_stevilka = $_POST["postna_stevilka"];
-    $mesto = $_POST["mesto"];
-    $ulica = $_POST["ulica"];
-    $hisna_stevilka = $_POST["hisna_stevilka"];
-    $telefon = $_POST["telefon"];
-    $email = $_POST["email"];
-    $geslo = $_POST["geslo"];
+    $ime = mysqli_real_escape_string($conn, $_POST["ime"]);
+    $priimek = mysqli_real_escape_string($conn, $_POST["priimek"]);
+    $postna_stevilka = mysqli_real_escape_string($conn, $_POST["postna_stevilka"]);
+    $mesto = mysqli_real_escape_string($conn, $_POST["mesto"]);
+    $ulica = mysqli_real_escape_string($conn, $_POST["ulica"]);
+    $hisna_stevilka = mysqli_real_escape_string($conn, $_POST["hisna_stevilka"]);
+    $telefon = mysqli_real_escape_string($conn, $_POST["telefon"]);
+    $email = mysqli_real_escape_string($conn, $_POST["email"]);
+    $geslo = mysqli_real_escape_string($conn, $_POST["geslo"]);
     
     
     // site polinja se prazni

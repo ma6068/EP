@@ -2,8 +2,8 @@
 	session_start();
 	include 'konekcija.php';
 	
-	$email = $_POST["email"];
-	$geslo = $_POST["geslo"];
+        $email = mysqli_real_escape_string($conn, $_POST["email"]);
+        $geslo = mysqli_real_escape_string($conn, $_POST["geslo"]);
         
         // vrni error ako ne se ispolneti site poljinja
         if (empty($email) || empty($geslo)) {
