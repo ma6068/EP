@@ -12,7 +12,14 @@
     $podatoci = mysqli_num_rows($rezultat);
     
     if ($podatoci > 0) {
+        $akt = '';
         while ($podatok = mysqli_fetch_assoc($rezultat)) {
+           if ($podatok['status'] == 'aktiven') {
+               $akt = 'Active';
+           }
+           else {
+               $akt = 'Deactivated';
+           }
            echo '<table align=center width="100%" border="0">
                     <tr>
                         <td align="center" valign="center">
@@ -29,7 +36,7 @@
                                     <td>'.$podatok['priimek'].'</td>
                                     <td>'.$podatok['email'].'</td>
                                     <td>'.$podatok['telefon'].'</td>
-                                    <td>'.$podatok['status'].'</td>
+                                    <td>'.$akt.'</td>
                                 </tr>
                         </td>
                     </tr>
