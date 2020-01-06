@@ -5,29 +5,25 @@
     </head>
     <body>
         <?php
-        # Avtorizirani uporabniki (to navadno pride iz podatkovne baze)
-        $authorized_users = ["Ana", "Admin", "Emil"];
-
-        # preberemo odjemačev certifikat
+        $authorized_users = [$_SESSION["uporabnik"]["email"]];
+        
         $client_cert = filter_input(INPUT_SERVER, "SSL_CLIENT_CERT");
 
-        # in ga razčlenemo
-        $cert_data = openssl_x509_parse($client_cert);
-        
-        # preberemo ime uporabnika (polje "common name")
-        $commonname = $cert_data['subject']['CN'];
-
-        # Če se ime nahaja na seznam avtoriziranih uporabnikov prikažemo čas.
-        if (in_array($commonname, $authorized_users)) {
-            echo "$commonname je avtoriziran uporabnik, zato vidi trenutni čas: " . date("H:i");
-        } else {
-        # Sicer časa ne prikažemo.
-            echo "$commonname ni avtoriziran uporabnik in nima dostopa do ure";
+        if ($client_cert == null) {
+            die('err: Spremenljivka SSL_CLIENT_CERT ni nastavljena.');
         }
 
-        # Celotna vsebina certifikata.
-        echo "<p>Vsebina certifikata: ";
-        var_dump($cert_data);
+        $cert_data = openssl_x509_parse($client_cert);
+        $username = $cert_data['subject']['CN'];
+        $commonname = (is_array($cert_data['subject']['emailAddress']) ?
+                        $cert_data['subject']['emailAddress'][0] : $cert_data['subject']['emailAddress']);
+        if (in_array($commonname, $authorized_users)) {
+            header('Location: ' . "../view/prijava.php");
+            
+        } else {
+            $_SESSION["uporabnik"] = NULL;
+            header('Location: ' . "../view/anonimenKatalog.php");
+        }
         ?>
     </body>
 </html>
