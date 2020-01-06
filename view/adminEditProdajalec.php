@@ -33,7 +33,8 @@
                     </tr>
                 </table>
                 <a class="btn btn-primary" href="./adminEditProdajalec2.php?id_uporabnik=' . $podatok['id_uporabnik'] . '">Edit</a>
-                </form>';
+                <a class="btn btn-primary" href="./adminADProdajalecController.php?id_uporabnik=' . $podatok['id_uporabnik'] . '">Change status</a>
+                ';
         }
     }
     // nema stranki

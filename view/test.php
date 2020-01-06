@@ -18,6 +18,6 @@
             //echo("\n");
         }
     }
-    echo $_SESSION['kolicina'];
+    echo $_SESSION['aaa'];
 ?>
 

@@ -8,7 +8,7 @@
     $email = $_POST["email"];
     $geslo = $_POST["geslo"];
     
-    $id_uporabnik = $_SESSION['id_uporabnik'];
+    $id_uporabnik = $_SESSION['id_u'];
     
     // ako site polinja se prazni
     if (empty($ime) && empty($priimek) && empty($email) && empty($geslo)) {
