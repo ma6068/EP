@@ -6,7 +6,7 @@
     }
     include 'konekcija.php';
     include 'prodajalecGlava.php';
-    $_SESSION['id_uporabnik'] = $_GET["id_uporabnik"];
+    $_SESSION['id_u'] = $_GET["id_uporabnik"];
 ?>
 
 

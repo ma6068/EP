@@ -5,7 +5,7 @@
     
     $id_uporabnik = $_GET["id_uporabnik"];
     
-    // vidi dali imas uporabnik so takov email
+    // vrati go segasniot status
     $query = "SELECT * FROM uporabnik WHERE id_uporabnik='$id_uporabnik'";
     $rezultat = mysqli_query($conn, $query);
     $podatoci = mysqli_fetch_assoc($rezultat);

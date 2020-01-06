@@ -51,9 +51,6 @@
                                     <a class="nav-link" href="./prodajalecAddClient.php">Add client<span class="sr-only"></span></a>
 				</li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="./prodajalecADClient.php">Change client's status<span class="sr-only"></span></a>
-				</li>
-                                <li class="nav-item">
                                     <a class="nav-link" href="./prodajalecEditClient.php">Edit client<span class="sr-only"></span></a>
 				</li>
 			</ul>

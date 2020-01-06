@@ -35,7 +35,7 @@
                     </tr>
                 </table>
                 <a class="btn btn-primary" href="./prodajalecEditClient2.php?id_uporabnik=' . $podatok['id_uporabnik'] . '">Edit</a>
-                </form>';
+                <a class="btn btn-primary" href="./prodajalecADClientController.php?id_uporabnik=' . $podatok['id_uporabnik'] . '">Change status</a>';
         }
     }
     // nema stranki

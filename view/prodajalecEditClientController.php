@@ -3,7 +3,7 @@
     session_start();
     include 'konekcija.php';
     
-    $id_uporabnik = $_SESSION['id_uporabnik'];
+    $id_uporabnik = $_SESSION['id_u'];
     
     $ime = $_POST["ime"];
     $priimek = $_POST["priimek"];
