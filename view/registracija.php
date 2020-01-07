@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/all.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <meta charset="utf-8">
     <title>Registration</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,6 +61,9 @@
                                 </div>
                                 <div class="form-group">
                                     <input id="ponoviGeslo" name="ponoviGeslo" placeholder="Repeat password" class="form-control" type="password" maxlength="30">
+                                </div>
+                                <div class="form-group">
+                                        <div class="g-recaptcha" data-sitekey="6Ld6hcoUAAAAAPY6B_OGBeiIZlFmedIKtWA-65AX"></div>
                                 </div>
                                 <div class="form-group" id="dugme">
                                     <button class="btn btn-primary btn-block" type="submit"> Register</button>

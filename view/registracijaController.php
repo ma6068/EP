@@ -26,10 +26,19 @@
     
     // nekoi polinja se prazni
     if (empty($ime) || empty($priimek) || empty($postna_stevilka) || empty($mesto) 
-            || empty($ulica)|| empty($hisna_stevilka) || empty($telefon) || empty($email) || empty($geslo) || empty($ponoviGeslo)) {
+            || empty($ulica)|| empty($hisna_stevilka) || empty($telefon) || empty($email) || empty($geslo) || empty($ponoviGeslo)
+            || !isset($_POST['g-recaptcha-response']) || empty($_POST['g-recaptcha-response'])) {
         $_SESSION["napaka"] = "Please fill in all fields";
         header('Location: ' . "./registracija.php");
         exit();
+    }
+    
+    $secret = '6Ld6hcoUAAAAAPY6B_OGBeiIZlFmedIKtWA-65AX';
+    $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
+    $responseData = json_decode($verifyResponse);
+    
+    if (!$responseData->success) {
+        $_SESSION["napaka"] = "Verification unsuccessful!";
     }
 
     // barame dali postoi toj korisnik
