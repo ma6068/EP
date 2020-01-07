@@ -5,15 +5,15 @@
     
     $id_uporabnik = $_SESSION['id_uporabnik'];
     
-    $ime = mysqli_real_escape_string($conn, $_POST["ime"]);
-    $priimek = mysqli_real_escape_string($conn, $_POST["priimek"]);
-    $postna_stevilka = mysqli_real_escape_string($conn, $_POST["postna_stevilka"]);
-    $mesto = mysqli_real_escape_string($conn, $_POST["mesto"]);
-    $ulica = mysqli_real_escape_string($conn, $_POST["ulica"]);
-    $hisna_stevilka = mysqli_real_escape_string($conn, $_POST["hisna_stevilka"]);
-    $telefon = mysqli_real_escape_string($conn, $_POST["telefon"]);
-    $email = mysqli_real_escape_string($conn, $_POST["email"]);
-    $geslo = mysqli_real_escape_string($conn, $_POST["geslo"]);
+    $ime = iscisti(mysqli_real_escape_string($conn, $_POST["ime"]));
+    $priimek = iscisti(mysqli_real_escape_string($conn, $_POST["priimek"]));
+    $postna_stevilka = iscisti(mysqli_real_escape_string($conn, $_POST["postna_stevilka"]));
+    $mesto = iscisti(mysqli_real_escape_string($conn, $_POST["mesto"]));
+    $ulica = iscisti(mysqli_real_escape_string($conn, $_POST["ulica"]));
+    $hisna_stevilka = iscisti(mysqli_real_escape_string($conn, $_POST["hisna_stevilka"]));
+    $telefon = iscisti(mysqli_real_escape_string($conn, $_POST["telefon"]));
+    $email = iscisti(mysqli_real_escape_string($conn, $_POST["email"]));
+    $geslo = iscisti(mysqli_real_escape_string($conn, $_POST["geslo"]));
     
     
     // site polinja se prazni

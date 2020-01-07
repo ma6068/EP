@@ -4,6 +4,14 @@
 	$password = "ep";
 	$dbname = "baza";
         
+        function iscisti($data){
+            $data=trim($data);
+            $data=stripcslashes($data);
+            $data=htmlspecialchars($data);
+            $data=strip_tags($data);
+            return $data;
+        }
+        
 	$conn = mysqli_connect($servername, $username, $password, $dbname);
 	error_reporting(E_ERROR); 
         

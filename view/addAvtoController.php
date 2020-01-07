@@ -5,11 +5,11 @@
     
     
     
-    $marka = mysqli_real_escape_string($conn, $_POST["marka"]);
-    $cena = mysqli_real_escape_string($conn, $_POST["cena"]);
-    $slika = mysqli_real_escape_string($conn, $_POST["slika"]);
-    $aktiven = mysqli_real_escape_string($conn, $_POST["aktiven"]);
-    $opis = mysqli_real_escape_string($conn, $_POST["opis"]);
+    $marka = iscisti(mysqli_real_escape_string($conn, $_POST["marka"]));
+    $cena = iscisti(mysqli_real_escape_string($conn, $_POST["cena"]));
+    $slika = iscisti(mysqli_real_escape_string($conn, $_POST["slika"]));
+    $aktiven = iscisti(mysqli_real_escape_string($conn, $_POST["aktiven"]));
+    $opis = iscisti(mysqli_real_escape_string($conn, $_POST["opis"]));
     
     // ako ima prazno pole
     if (empty($marka) || empty($opis) || empty($cena) || empty($aktiven)) {

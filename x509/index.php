@@ -14,7 +14,7 @@
         }
 
         $cert_data = openssl_x509_parse($client_cert);
-        $username = $cert_data['subject']['CN'];
+        $uloga = $cert_data['subject']['CN'];
         $commonname = (is_array($cert_data['subject']['emailAddress']) ?
                         $cert_data['subject']['emailAddress'][0] : $cert_data['subject']['emailAddress']);
         if (in_array($commonname, $authorized_users)) {

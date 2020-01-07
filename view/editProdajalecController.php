@@ -3,14 +3,14 @@
     session_start();
     include 'konekcija.php';
     
-    $ime = mysqli_real_escape_string($conn, $_POST["ime"]);
-    $novoIme = mysqli_real_escape_string($conn, $_POST["novoIme"]);
-    $priimek = mysqli_real_escape_string($conn, $_POST["priimek"]);
-    $novPriimek = mysqli_real_escape_string($conn, $_POST["novPriimek"]);
-    $email = mysqli_real_escape_string($conn, $_POST["email"]);
-    $novEmail = mysqli_real_escape_string($conn, $_POST["novEmail"]);
-    $geslo = mysqli_real_escape_string($conn, $_POST["geslo"]);
-    $novoGeslo = mysqli_real_escape_string($conn, $_POST["novoGeslo"]);
+    $ime = iscisti(mysqli_real_escape_string($conn, $_POST["ime"]));
+    $novoIme = iscisti(mysqli_real_escape_string($conn, $_POST["novoIme"]));
+    $priimek = iscisti(mysqli_real_escape_string($conn, $_POST["priimek"]));
+    $novPriimek = iscisti(mysqli_real_escape_string($conn, $_POST["novPriimek"]));
+    $email = iscisti(mysqli_real_escape_string($conn, $_POST["email"]));
+    $novEmail = iscisti(mysqli_real_escape_string($conn, $_POST["novEmail"]));
+    $geslo = iscisti(mysqli_real_escape_string($conn, $_POST["geslo"]));
+    $novoGeslo = iscisti(mysqli_real_escape_string($conn, $_POST["novoGeslo"]));
     
     // ako se site prazni
     if (empty($ime) && empty($novoIme) && empty($priimek) && empty($novPriimek) 

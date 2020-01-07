@@ -3,10 +3,10 @@
     session_start();
     include 'konekcija.php';
     
-    $ime = mysqli_real_escape_string($conn, $_POST["ime"]);
-    $priimek = mysqli_real_escape_string($conn, $_POST["priimek"]);
-    $email = mysqli_real_escape_string($conn, $_POST["email"]);
-    $geslo = mysqli_real_escape_string($conn, $_POST["geslo"]);
+    $ime = iscisti(mysqli_real_escape_string($conn, $_POST["ime"]));
+    $priimek = iscisti(mysqli_real_escape_string($conn, $_POST["priimek"]));
+    $email = iscisti(mysqli_real_escape_string($conn, $_POST["email"]));
+    $geslo = iscisti(mysqli_real_escape_string($conn, $_POST["geslo"]));
     
     $id_uporabnik = $_SESSION['id_u'];
     

@@ -3,7 +3,7 @@
     session_start();
     include 'konekcija.php';
     
-    $id_avto= $_GET["id_avto"];
+    $id_avto= iscisti(mysqli_real_escape_string($conn, $_GET["id_avto"]));
     
     // vrati go segasniot status
     $query = "SELECT * FROM avto WHERE id_avto='$id_avto'";

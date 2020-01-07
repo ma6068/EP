@@ -3,7 +3,7 @@
     include 'konekcija.php';
     session_start();
     
-    $id_avto= mysqli_real_escape_string($conn, $_GET['id_avto']);
+    $id_avto= iscisti(mysqli_real_escape_string($conn, $_GET['id_avto']));
     $id_kosarica = $_SESSION['id_kosarica'];
     
     $_SESSION['id_kosarica'] = $id_kosarica;

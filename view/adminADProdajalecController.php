@@ -3,7 +3,7 @@
     session_start();
     include 'konekcija.php';
     
-    $id_uporabnik = mysqli_real_escape_string($conn, $_GET["id_uporabnik"]);
+    $id_uporabnik = iscisti(mysqli_real_escape_string($conn, $_GET["id_uporabnik"]));
     
     // vrati go segasniot status
     $query = "SELECT * FROM uporabnik WHERE id_uporabnik='$id_uporabnik'";

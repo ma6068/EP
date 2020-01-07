@@ -3,9 +3,9 @@
     session_start();
     include 'konekcija.php';
     
-    $marka = mysqli_real_escape_string($conn, $_POST["marka"]);
-    $cena = mysqli_real_escape_string($conn, $_POST["cena"]);
-    $opis = mysqli_real_escape_string($conn, $_POST["opis"]);
+    $marka = iscisti(mysqli_real_escape_string($conn, $_POST["marka"]));
+    $cena = iscisti(mysqli_real_escape_string($conn, $_POST["cena"]));
+    $opis = iscisti(mysqli_real_escape_string($conn, $_POST["opis"]));
     
     $id_avto = $_SESSION['id_avto'];
     

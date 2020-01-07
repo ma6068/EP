@@ -3,8 +3,8 @@
     session_start();
     include 'konekcija.php';
     
-    $slika = mysqli_real_escape_string($conn, $_POST["slika"]);
-    $novaSlika = mysqli_real_escape_string($conn, $_POST["novaSlika"]);
+    $slika = iscisti(mysqli_real_escape_string($conn, $_POST["slika"]));
+    $novaSlika = iscisti(mysqli_real_escape_string($conn, $_POST["novaSlika"]));
     
     $id_avto = $_SESSION['id_avto'];
     
