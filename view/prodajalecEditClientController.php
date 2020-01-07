@@ -5,15 +5,15 @@
     
     $id_uporabnik = $_SESSION['id_u'];
     
-    $ime = $_POST["ime"];
-    $priimek = $_POST["priimek"];
-    $postna_stevilka = $_POST["postna_stevilka"];
-    $mesto = $_POST["mesto"];
-    $ulica = $_POST["ulica"];
-    $hisna_stevilka = $_POST["hisna_stevilka"];
-    $telefon = $_POST["telefon"];
-    $email = $_POST["email"];
-    $geslo = $_POST["geslo"];
+    $ime = mysqli_real_escape_string($conn, $_POST["ime"]);
+    $priimek = mysqli_real_escape_string($conn, $_POST["priimek"]);
+    $postna_stevilka = mysqli_real_escape_string($conn, $_POST["postna_stevilka"]);
+    $mesto = mysqli_real_escape_string($conn, $_POST["mesto"]);
+    $ulica = mysqli_real_escape_string($conn, $_POST["ulica"]);
+    $hisna_stevilka = mysqli_real_escape_string($conn, $_POST["hisna_stevilka"]);
+    $telefon = mysqli_real_escape_string($conn, $_POST["telefon"]);
+    $email = mysqli_real_escape_string($conn, $_POST["email"]);
+    $geslo = mysqli_real_escape_string($conn, $_POST["geslo"]);
     
     
     // site polinja se prazni
@@ -45,6 +45,17 @@
     }
     // geslo
     if (!empty($geslo)) {
+        // validacija pasvord 
+        $uppercase = preg_match('@[A-Z]@', $geslo);
+        $lowercase = preg_match('@[a-z]@', $geslo);
+        $number = preg_match('@[0-9]@', $geslo);
+        if(!$uppercase || !$lowercase || !$number || strlen($geslo) < 6) {
+            mysqli_stmt_close($sql); 
+            mysqli_close($conn);
+            $_SESSION["napaka"] = "The password must have a uppercase, lowercase letter, number and length of at least 6 characters";
+            header('Location: ' . "./prodajalecEditClient2.php?id_uporabnik=$id_uporabnik");
+            exit();
+        }
         $skrienPasvord = password_hash($geslo, PASSWORD_BCRYPT);
         $query = "UPDATE uporabnik SET geslo='$skrienPasvord' WHERE id_uporabnik='$id_uporabnik'";
         $rezultat = mysqli_query($conn, $query);

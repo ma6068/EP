@@ -3,10 +3,10 @@
     session_start();
     include 'konekcija.php';
     
-    $ime = $_POST["ime"];
-    $priimek = $_POST["priimek"];
-    $email = $_POST["email"];
-    $geslo = $_POST["geslo"];
+    $ime = mysqli_real_escape_string($conn, $_POST["ime"]);
+    $priimek = mysqli_real_escape_string($conn, $_POST["priimek"]);
+    $email = mysqli_real_escape_string($conn, $_POST["email"]);
+    $geslo = mysqli_real_escape_string($conn, $_POST["geslo"]);
     
     $id_uporabnik = $_SESSION['id_u'];
     
@@ -53,6 +53,17 @@
     
     // geslo 
     if (!empty($geslo)) {
+        // validacija pasvord 
+        $uppercase = preg_match('@[A-Z]@', $geslo);
+        $lowercase = preg_match('@[a-z]@', $geslo);
+        $number = preg_match('@[0-9]@', $geslo);
+        if(!$uppercase || !$lowercase || !$number || strlen($geslo) < 6) {
+            mysqli_stmt_close($sql); 
+            mysqli_close($conn);
+            $_SESSION["napaka"] = "The password must have a uppercase, lowercase letter, number and length of at least 6 characters";
+            header('Location: ' . "./adminEditProdajalec2.php?id_uporabnik=$id_uporabnik");
+            exit();
+        }
         $skrienPasvord = password_hash($geslo, PASSWORD_BCRYPT);
         $query = "UPDATE uporabnik SET geslo='$skrienPasvord' WHERE id_uporabnik='$id_uporabnik'";
         $rezultat = mysqli_query($conn, $query);

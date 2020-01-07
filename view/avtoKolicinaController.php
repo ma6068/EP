@@ -6,7 +6,7 @@
     $id_kosarica = $_SESSION["id_kosarica"];
     $id_avto = $_SESSION['id_avto'];
     
-    $kolicina = $_POST['kolicina'];
+    $kolicina = mysqli_real_escape_string($conn, $_POST['kolicina']);
     
     // ako ima prazno pole 
     if (empty($kolicina)) {

@@ -3,11 +3,13 @@
     session_start();
     include 'konekcija.php';
     
-    $marka = $_POST["marka"];
-    $cena = $_POST["cena"];
-    $slika = $_POST["slika"];
-    $aktiven = $_POST["aktiven"];
-    $opis = $_POST["opis"];
+    
+    
+    $marka = mysqli_real_escape_string($conn, $_POST["marka"]);
+    $cena = mysqli_real_escape_string($conn, $_POST["cena"]);
+    $slika = mysqli_real_escape_string($conn, $_POST["slika"]);
+    $aktiven = mysqli_real_escape_string($conn, $_POST["aktiven"]);
+    $opis = mysqli_real_escape_string($conn, $_POST["opis"]);
     
     // ako ima prazno pole
     if (empty($marka) || empty($opis) || empty($cena) || empty($aktiven)) {

@@ -3,14 +3,14 @@
     session_start();
     include 'konekcija.php';
     
-    $ime = $_POST["ime"];
-    $novoIme = $_POST["novoIme"];
-    $priimek = $_POST["priimek"];
-    $novPriimek = $_POST["novPriimek"];
-    $email = $_POST["email"];
-    $novEmail = $_POST["novEmail"];
-    $geslo = $_POST["geslo"];
-    $novoGeslo = $_POST["novoGeslo"];
+    $ime = mysqli_real_escape_string($conn, $_POST["ime"]);
+    $novoIme = mysqli_real_escape_string($conn, $_POST["novoIme"]);
+    $priimek = mysqli_real_escape_string($conn, $_POST["priimek"]);
+    $novPriimek = mysqli_real_escape_string($conn, $_POST["novPriimek"]);
+    $email = mysqli_real_escape_string($conn, $_POST["email"]);
+    $novEmail = mysqli_real_escape_string($conn, $_POST["novEmail"]);
+    $geslo = mysqli_real_escape_string($conn, $_POST["geslo"]);
+    $novoGeslo = mysqli_real_escape_string($conn, $_POST["novoGeslo"]);
     
     // ako se site prazni
     if (empty($ime) && empty($novoIme) && empty($priimek) && empty($novPriimek) 
@@ -116,6 +116,17 @@
         $podatoci = mysqli_fetch_assoc($rezultat);
         // tocen pasvord 
         if (password_verify($geslo, $podatoci['geslo'])) {
+            // validacija pasvord 
+            $uppercase = preg_match('@[A-Z]@', $novoGeslo);
+            $lowercase = preg_match('@[a-z]@', $novoGeslo);
+            $number = preg_match('@[0-9]@', $novoGeslo);
+            if(!$uppercase || !$lowercase || !$number || strlen($novoGeslo) < 6) {
+                mysqli_stmt_close($sql); 
+                mysqli_close($conn);
+                $_SESSION["napaka"] = "The password must have a uppercase, lowercase letter, number and length of at least 6 characters";
+                header('Location: ' . "./editAdmin.php");
+                exit();
+            }
             $skrienPasvord = password_hash($novoGeslo, PASSWORD_BCRYPT);
             $query = "UPDATE uporabnik SET geslo='$skrienPasvord' WHERE id_uporabnik='$sega'";
             $rezultat = mysqli_query($conn, $query);
