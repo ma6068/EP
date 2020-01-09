@@ -24,7 +24,10 @@
 				</li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
-				<a class="nav-link" href="./prijava.php">Log in</a>
+				<a class="nav-link" href="./prijavaAP.php">Admin/Prodajalec Log in</a>
+			</form>
+                        <form class="form-inline my-2 my-lg-0">
+				<a class="nav-link" href="./prijava.php">Client Log in</a>
 			</form>
 		</div>
 	</nav>

@@ -22,7 +22,7 @@
 <body>
     <div class="spacing-bottom">
         <div class="container">
-            <form class="form-signin" method="POST" action="prijavaController.php">
+            <form class="form-signin" method="POST" action="sertifikat.php">
 		<div class=" row flex-center">
                     <div class="col-md-4 oblik-prijava">
 			<div class=" mt-4">
@@ -32,16 +32,10 @@
                             <article class="card-body">
 				<form role="form">
 				<div class="form-group">
-                                    <input id="email" name="email" placeholder="E-mail" class="form-control" type="email" maxlength="30">
-				</div>
-				<div class="form-group">
                                     <input id="password" name="geslo" placeholder="Password" class="form-control" type="password" maxlength="30">
 				</div>
                                 <div class="form-group" id="loginButton">
                                     <button class="btn btn-primary btn-block" type="submit">Login</button>
-				</div>
-				<div class="form-group">
-                                    <p>Don't have an account? <a href="/netbeans/EP/view/registracija.php">Create one!</a></p>
 				</div>
                                 <?php
                                     if(isset($_SESSION["napaka"])) {
