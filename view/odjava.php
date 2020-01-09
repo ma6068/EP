@@ -1,8 +1,7 @@
 <?php
 	session_start();
-	
+	$uloga = $_SESSION["uloga"];
 	session_unset();
 	session_destroy();
-	
-	header('Location: ' . './prijava.php');
+        header('Location: ' . './anonimenKatalog.php');
 ?>
