@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    include 'konekcija.php';
+    include '../view/konekcija.php';
 ?>
 <html>
     <head>

@@ -4,7 +4,7 @@
 	header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
         exit();
     }	
-    include './glava.php';
+    include 'glava.php';
 ?>
 
 <!DOCTYPE html>
