@@ -4,7 +4,7 @@
 	header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
         exit();
     }	
-    include 'anonimenGlava.php';
+    include './glava.php';
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<meta charset="utf-8">
 	<title>Login</title>
-        <link rel="stylesheet" type="text/css" href="./css/all.css">
+        <link rel="stylesheet" type="text/css" href="../view/css/all.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 

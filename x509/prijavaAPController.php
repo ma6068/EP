@@ -52,10 +52,10 @@
                     $_SESSION['email'] = $podatoci['email'];
                     $_SESSION['uloga'] = $podatoci['uloga'];
                     if ($_SESSION['uloga']=='admin') {
-                        header('Location: ' . "./editAdmin.php");
+                        header('Location: ' . "../view/editAdmin.php");
                     }
                     if ($_SESSION['uloga']=='prodajalec') {
-                        header('Location: ' . "./editProdajalec.php");
+                        header('Location: ' . "../view/editProdajalec.php");
                     }
                     exit();
                 }

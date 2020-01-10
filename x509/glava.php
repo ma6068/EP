@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<meta charset="utf-8">
 	<title>Anonymous User</title>
-        <link rel="stylesheet" type="text/css" href="./css/all.css">
+        <link rel="stylesheet" type="text/css" href="../view/css/all.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
@@ -20,14 +20,14 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="./anonimenKatalog.php">Catalogue<span class="sr-only"></span></a>
+                                    <a class="nav-link" href="../view/anonimenKatalog.php">Catalogue<span class="sr-only"></span></a>
 				</li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
 				<a class="nav-link" href="../x509/prijavaAP.php">Admin/Prodajalec Log in</a>
 			</form>
                         <form class="form-inline my-2 my-lg-0">
-				<a class="nav-link" href="./prijava.php">Client Log in</a>
+                            <a class="nav-link" href="../view/prijava.php">Client Log in</a>
 			</form>
 		</div>
 	</nav>
